@@ -3,7 +3,11 @@ import "./App.css";
 function App() {
 	const name = "toto";
 	const text = "Welcome";
-	return <>{text}</>;
+	return (
+		<>
+			{text} {name}
+		</>
+	);
 }
 
 export default App;
