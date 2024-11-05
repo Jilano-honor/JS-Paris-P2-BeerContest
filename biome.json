@@ -1,10 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
   "files": {
-    "ignore": ["**/dist/*", "**/*.template.*", "**/tsconfig.json", "coverage"]
+    "ignore": ["**/dist/*", "**/*.template.*", "*.config.*", "**/tsconfig.json", "coverage"]
   },
   "formatter": {
-			"ignore": ["*.json", "*.js", "commitlint.config.js", "*.html"],
+			"ignore": ["*.json", "*.js", "**.js", "*.html"],
 			"indentStyle": "space"
 		},
   "organizeImports": { "enabled": true },
