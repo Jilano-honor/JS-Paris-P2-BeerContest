@@ -1,12 +1,8 @@
-import './App.css'
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      Welcome
-    </>
-  )
+  const text = "Welcome";
+  return <>{text}</>;
 }
 
-export default App
+export default App;

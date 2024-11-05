@@ -3,15 +3,20 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "src",
+    "public"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "check": "biome check --error-on-warnings --no-errors-on-unmatched --staged . && npm run check-types --if-present",
+    "check": "biome check --error-on-warnings --no-errors-on-unmatched --staged . && npm run check-types --workspaces --if-present",
     "preview": "vite preview",
     "prepare": "husky || true"
   },
   "dependencies": {
     "beercontest": "file:",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
