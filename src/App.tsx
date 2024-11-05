@@ -1,7 +1,8 @@
 import "./App.css";
 
 function App() {
-  const text = "Welcome";
+	const text = "Welcome";
+
 	return <>{text}</>;
 }
 
