@@ -5,7 +5,7 @@
   },
   "formatter": {
 			"ignore": ["*.json", "*.js", "*.*.js", "*.html"],
-			"indentStyle": "space"
+			"indentStyle": "tab"
 		},
   "organizeImports": { "enabled": true },
   "linter": {
