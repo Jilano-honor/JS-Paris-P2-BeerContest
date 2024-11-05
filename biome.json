@@ -1,7 +1,7 @@
 {
   "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
   "files": {
-    "ignore": ["**/dist/*", "**/*.template.*", "*.config.*", "**/tsconfig.json", "coverage"]
+    "ignore": ["*.js", "**/dist/*", "**/*.template.*", "*.config.*", "**/tsconfig.json", "coverage"]
   },
   "formatter": {
 			"ignore": ["*.json", "*.js", "*.*.js", "*.html"],
