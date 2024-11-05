@@ -28,6 +28,6 @@ git config --global core.autocrlf false
 
 | Commande               | Description                                                                 |
 |------------------------|-----------------------------------------------------------------------------|
-| `npm install`          | Installe les dépendances pour le client et le serveur                       |
+| `npm install`          | Installe les dépendances                   |
 | `npm run dev`          | Démarre le server en développement         |
 | `npm run check`        | Exécute les outils de validation (linting et formatage)                     |
