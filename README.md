@@ -1,50 +1,33 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Ce modèle fournit une configuration minimale pour faire fonctionner React dans Vite avec certaines règles Biome et package préinstallé.
 
-Currently, two official plugins are available:
+Il est préconfiguré avec un ensemble d'outils pour aider les étudiants à produire du code de qualité industrielle, tout en restant un outil pédagogique :
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Husky** : Vous permet d'exécuter des commandes spécifiques déclenchées par des événements _git_.
+- **Vite** : Alternative à _Create-React-App_, offrant une expérience plus fluide avec moins d'outils.
+- **Biome** : Alternative à _ESlint_ et _Prettier_, assurant la qualité du code selon les règles choisies.
 
-## Expanding the ESLint configuration
+## Utilisateurs Windows
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Assurez-vous de lancer ces commandes dans un terminal Git pour éviter [les problèmes de formats de nouvelles lignes](https://en.wikipedia.org/wiki/Newline#Issues_with_different_newline_formats) :
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+git config --global core.eol lf
+git config --global core.autocrlf false
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Installation & Utilisation
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Installez le plugin **Biome** dans VSCode et configurez-le.
+2. Clonez ce dépôt, puis accédez au répertoire cloné.
+3. Exécutez la commande `npm install`.
+4. Créez un fichier d'environnement (`.env`) à la racine du dossier projet : vous pouvez copier le fichier `.env.sample` comme modèle (**ne le supprimez pas**).
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Commandes de Base
+
+| Commande               | Description                                                                 |
+|------------------------|-----------------------------------------------------------------------------|
+| `npm install`          | Installe les dépendances pour le client et le serveur                       |
+| `npm run dev`          | Démarre le server en développement         |
+| `npm run check`        | Exécute les outils de validation (linting et formatage)                     |
