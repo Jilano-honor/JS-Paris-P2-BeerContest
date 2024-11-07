@@ -1,7 +1,7 @@
 main#game-main {
 	display: grid;
 	grid-template: 2fr 2fr / 500px 2fr;
-	height: 80vh;
+	height: 85vh;
 
 	background-image: url("../assets/game-background.jpg");
 	background-size: cover;
