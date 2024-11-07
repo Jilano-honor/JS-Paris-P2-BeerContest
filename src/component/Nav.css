@@ -1,0 +1,9 @@
+#Navigation_bar {
+	background-color: var(--light-color);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+#Navigation_bar img {
+	width: 15%;
+}

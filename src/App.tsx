@@ -1,13 +1,11 @@
 import "./App.css";
+import Navigation from "./component/Nav";
 
 function App() {
-	const name = "toto";
-	const text = "Welcome";
 	return (
 		<>
-			{text} {name}
+			<Navigation />
 		</>
 	);
 }
-
 export default App;
