@@ -4,6 +4,8 @@ import { Link, RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
+
+
 const router = createBrowserRouter([
 	{
 		element: <App />,

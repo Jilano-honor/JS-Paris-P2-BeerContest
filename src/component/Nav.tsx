@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/image.png";
+import logo from "../assets/Beer Contest.png";
 import "../component/Nav.css";
+
 
 function Navigation() {
 	return (
-		<nav id="Navigation_bar">
+		<nav id="navigation-bar">
 			<img src={logo} alt="Logo" />
 			<Link to="/">Accueil</Link>
 			<Link to="/game">Jeu</Link>
