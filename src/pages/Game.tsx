@@ -1,7 +1,7 @@
 import "./Game.css";
 
-import AlcoholLevel from "../components/AlcoholLevel";
-import GameSet from "../components/GameSet";
+import AlcoholLevel from "../component/AlcoholLevel";
+import GameSet from "../component/GameSet";
 
 function Game() {
 	return (

@@ -1,0 +1,12 @@
+#navigation-bar {
+	background-color: var(--light-color);
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 10vh;
+}
+
+#navigation-bar img {
+	width: 10%;
+	mix-blend-mode: multiply;
+}

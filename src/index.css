@@ -1,177 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap");
-
 :root {
 	--main-color: #e8871e;
 	--dark-color: #af3800;
 	--light-color: #edb458;
 	--second-color: #d4d4aa;
 }
-
-/* Reset */
-
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font: inherit;
-	font-size: 100%;
-	vertical-align: baseline;
-}
-
-/* HTML5 display-role reset for older browsers */
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-	display: block;
-}
-
-body {
-	line-height: 1;
-}
-
-ol,
-ul {
-	list-style: none;
-}
-
-blockquote,
-q {
-	quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-	content: "";
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
 /* Initialisation des fonts. A modifier les tailles de police au besoin */
-
 h1 {
 	font-family: "PT Sans Narrow", sans-serif;
 	font-size: 2rem;
 }
-
 h2,
 h3 {
 	font-family: "Marck Script", sans-serif;
 }
-
 h2 {
-	font-size: 2rem;
+	font-size: 1.7rem;
 }
-
 h3 {
-	font-size: 1.8rem;
+	font-size: 1.4rem;
 }
-
 p,
 a {
 	font-family: "Domine", serif;
-	font-size: 1rem;
 }
-
 button {
 	font-size: 1.5rem;
 }
-
 a {
 	text-decoration: none;
 	color: black;
