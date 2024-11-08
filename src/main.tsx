@@ -5,7 +5,6 @@ import App from "./App";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
 
-
 const router = createBrowserRouter([
 	{
 		element: <App />,

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import logo from "../assets/Beer Contest.png";
 import "../component/Nav.css";
 
-
 function Navigation() {
 	return (
 		<nav id="navigation-bar">
