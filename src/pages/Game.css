@@ -1,0 +1,25 @@
+main#game-main {
+	display: grid;
+	grid-template: 2fr 2fr / 500px 2fr;
+	height: 85vh;
+
+	background-image: url("../assets/game-background.jpg");
+	background-size: cover;
+}
+
+main#game-main div#game-alcohol-level {
+	position: absolute;
+	right: 0;
+}
+
+main#game-main section#game-gameset {
+	grid-area: 1 / 2 / 3 / 2;
+}
+
+main#game-main article#game-rules {
+	margin-top: 30%;
+	padding: 1em;
+
+	color: white;
+	background-color: rgba(0, 0, 0, 0.4);
+}
