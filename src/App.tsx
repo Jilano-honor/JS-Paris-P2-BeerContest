@@ -1,13 +1,13 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
+import Footer from "./component/Footer";
 
 function App() {
-	const name = "toto";
-	const text = "Welcome";
 	return (
 		<>
-			{text} {name}
+			<Outlet />
+			<Footer />
 		</>
 	);
 }
-
 export default App;
