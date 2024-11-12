@@ -1,11 +1,10 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
 
 function App() {
-	const name = "toto";
-	const text = "Welcome";
 	return (
 		<>
-			{text} {name}
+			<Outlet />
 		</>
 	);
 }
