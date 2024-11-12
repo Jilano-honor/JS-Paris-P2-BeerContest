@@ -35,7 +35,7 @@ function GameSet() {
 
 	const level = useCallback((deck: BeerProps[]) => {
 		const deckAbv = deck.map((beer: BeerProps) =>
-			Number.parseFloat(beer.abv.replace("%", "")),
+			Number.parseFloat(beer.abv.slice(-1)),
 		);
 		const sumAbv = deckAbv.reduce((acc, curr) => acc + curr, 0);
 		return sumAbv;
