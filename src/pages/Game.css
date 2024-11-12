@@ -14,6 +14,13 @@ main#game-main div#game-alcohol-level {
 
 main#game-main section#game-gameset {
 	grid-area: 1 / 2 / 3 / 2;
+
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	align-items: center;
+
+	margin: 3rem;
 }
 
 main#game-main article#game-rules {

@@ -1,34 +1,43 @@
 @import url("https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap");
+
 :root {
 	--main-color: #e8871e;
 	--dark-color: #af3800;
 	--light-color: #edb458;
 	--second-color: #d4d4aa;
 }
+
 /* Initialisation des fonts. A modifier les tailles de police au besoin */
+
 h1 {
 	font-family: "PT Sans Narrow", sans-serif;
 	font-size: 2rem;
 }
+
 h2,
 h3 {
 	font-family: "Marck Script", sans-serif;
 }
+
 h2 {
 	font-size: 1.7rem;
 }
+
 h3 {
 	font-size: 1.4rem;
 }
+
 p,
 a {
 	font-family: "Domine", serif;
 }
+
 button {
 	font-size: 1.5rem;
 }
+
 a {
 	text-decoration: none;
 	color: black;
