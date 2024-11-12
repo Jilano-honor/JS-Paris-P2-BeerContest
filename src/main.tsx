@@ -1,11 +1,12 @@
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import { Link, RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
-
 import Game from "./pages/Game";
 import Home from "./pages/Home";
+
+import "./index.css";
+import "./reset.css";
 
 const router = createBrowserRouter([
 	{
@@ -15,7 +16,6 @@ const router = createBrowserRouter([
 				path: "/",
 				element: <Home />,
 			},
-
 			{
 				path: "/Game",
 				element: <Game />,
@@ -23,7 +23,10 @@ const router = createBrowserRouter([
 		],
 	},
 ]);
+const rootElement = document.getElementById("root");
 
-createRoot(document.getElementById("root") || document.body).render(
-	<RouterProvider router={router} />,
-);
+if (rootElement) {
+	createRoot(rootElement).render(<RouterProvider router={router} />);
+} else {
+	console.error("Root element not found!");
+}
