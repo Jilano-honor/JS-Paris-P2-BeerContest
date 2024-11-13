@@ -5,8 +5,8 @@ import App from "./App";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
 
-import "./index.css";
 import "./reset.css";
+import "./index.css";
 
 const router = createBrowserRouter([
 	{
