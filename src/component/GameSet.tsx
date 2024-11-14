@@ -19,16 +19,14 @@ function GameSet() {
 	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
 
 	const getBeers = useCallback(() => {
-		fetch("https://beer9.p.rapidapi.com/", {
+
+		fetch("http://localhost:3000/data", {
 			method: "GET",
-			headers: {
-				"x-rapidapi-key": "3d3ae33720msh1e9c565b73ea3f6p168475jsn91cc716d7ed8",
-				"x-rapidapi-host": "beer9.p.rapidapi.com",
-			},
+
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				setBeers(data.data);
+				setBeers(data);
 			})
 			.catch((error) => console.error("Erreur lors du fetch:", error));
 	}, []);
@@ -52,8 +50,8 @@ function GameSet() {
 					i < 5
 						? playerDeck.push(beers[Math.floor(Math.random() * beers.length)])
 						: computerDeck.push(
-								beers[Math.floor(Math.random() * beers.length)],
-							);
+							beers[Math.floor(Math.random() * beers.length)],
+						);
 				}
 				setDecks([playerDeck, computerDeck]);
 			} while (Math.abs(level(playerDeck) - level(computerDeck)) > 2);
@@ -75,14 +73,57 @@ function GameSet() {
 
 	// Gameplay
 
+	const [alcoholLevel, setAlcoholLevel] = useState(0);
+	const [userCard, setUserCard] = useState<BeerProps | null>(null);
+	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
+
+	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
+		const computerAbv = Number.parseFloat(computerCard.abv.replace('%', ''));
+		const userAbv = Number.parseFloat(userCard.abv.replace('%', ''));
+		if (computerAbv === userAbv) {
+			return "egalité";
+		}
+		return computerAbv > userAbv ? "computer" : "user";
+	};
+
+	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
+		if (winner === "computer") {
+			const userAbv = Number.parseFloat(userCard.abv.replace('%', ''));
+			setAlcoholLevel((prev) => prev + userAbv);
+		}
+	};
+
+	const handleUserCardSelect = (selectedCard: BeerProps) => {
+		const updatedComputerDeck = decks[1];
+		const updatedUserDeck = decks[0];
+
+		const computerSelectedCard = updatedComputerDeck[Math.floor(Math.random() * updatedComputerDeck.length)];
+
+		const newUserDeck = updatedUserDeck.filter((beer) => beer.sku !== selectedCard.sku);
+		const newComputerDeck = updatedComputerDeck.filter((beer) => beer.sku !== computerSelectedCard.sku);
+
+		setDecks([newUserDeck, newComputerDeck]);
+
+		setUserCard(selectedCard);
+		setComputerCard(computerSelectedCard);
+
+		const roundWinner = compareCard(selectedCard, computerSelectedCard);
+		updateAlcoholLevel(roundWinner, selectedCard);
+	};
+
+	const round = (userSelectedCard: BeerProps) => {
+		handleUserCardSelect(userSelectedCard);
+	};
+
+
 	// End of game
 
 	return (
 		<>
-			<section className="deck" id="user-deck">
-				{decks[0].length > 0 ? (
-					decks[0].map((beer) => (
-						<article key={`player ${beer.sku}`} className="temp-card">
+			<section className="deck" id="computer-deck">
+				{decks[1].length > 0 ? (
+					decks[1].map((beer) => (
+						<article key={`computer ${beer.sku}`} className="temp-card">
 							<p>{beer.name}</p>
 							<p>{beer.abv}</p>
 						</article>
@@ -91,11 +132,33 @@ function GameSet() {
 					<></>
 				)}
 			</section>
-			<section id="game-area" />
+			<section id="game-area">
+				<div id="computer-selected-card">
+					{computerCard ? (
+						<div>
+							<p>{computerCard.name}</p>
+							<p>ABV: {computerCard.abv}</p>
+						</div>
+					) : (
+						<p>en attente de ta card</p>
+					)}
+				</div>
+				<div id="user-selected-card">
+					{userCard ? (
+						<div>
+							<p>{userCard.name}</p>
+							<p>ABV: {userCard.abv}</p>
+						</div>
+					) : (
+						<p>Choisi une card</p>
+					)}
+				</div>
+			</section>
 			<section className="deck" id="user-deck">
-				{decks[1].length > 0 ? (
-					decks[1].map((beer) => (
-						<article key={`computer ${beer.sku}`} className="temp-card">
+				{decks[0].length > 0 ? (
+					decks[0].map((beer) => (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<article key={`player ${beer.sku}`} className="temp-card" onClick={() => handleUserCardSelect(beer)} >
 							<p>{beer.name}</p>
 							<p>{beer.abv}</p>
 						</article>
