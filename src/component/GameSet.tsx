@@ -19,10 +19,8 @@ function GameSet() {
 	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
 
 	const getBeers = useCallback(() => {
-
 		fetch("http://localhost:3000/data", {
 			method: "GET",
-
 		})
 			.then((response) => response.json())
 			.then((data) => {
@@ -50,8 +48,8 @@ function GameSet() {
 					i < 5
 						? playerDeck.push(beers[Math.floor(Math.random() * beers.length)])
 						: computerDeck.push(
-							beers[Math.floor(Math.random() * beers.length)],
-						);
+								beers[Math.floor(Math.random() * beers.length)],
+							);
 				}
 				setDecks([playerDeck, computerDeck]);
 			} while (Math.abs(level(playerDeck) - level(computerDeck)) > 2);
@@ -78,8 +76,8 @@ function GameSet() {
 	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
 
 	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
-		const computerAbv = Number.parseFloat(computerCard.abv.replace('%', ''));
-		const userAbv = Number.parseFloat(userCard.abv.replace('%', ''));
+		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
+		const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 		if (computerAbv === userAbv) {
 			return "egalité";
 		}
@@ -88,7 +86,7 @@ function GameSet() {
 
 	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
 		if (winner === "computer") {
-			const userAbv = Number.parseFloat(userCard.abv.replace('%', ''));
+			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
@@ -97,10 +95,17 @@ function GameSet() {
 		const updatedComputerDeck = decks[1];
 		const updatedUserDeck = decks[0];
 
-		const computerSelectedCard = updatedComputerDeck[Math.floor(Math.random() * updatedComputerDeck.length)];
+		const computerSelectedCard =
+			updatedComputerDeck[
+				Math.floor(Math.random() * updatedComputerDeck.length)
+			];
 
-		const newUserDeck = updatedUserDeck.filter((beer) => beer.sku !== selectedCard.sku);
-		const newComputerDeck = updatedComputerDeck.filter((beer) => beer.sku !== computerSelectedCard.sku);
+		const newUserDeck = updatedUserDeck.filter(
+			(beer) => beer.sku !== selectedCard.sku,
+		);
+		const newComputerDeck = updatedComputerDeck.filter(
+			(beer) => beer.sku !== computerSelectedCard.sku,
+		);
 
 		setDecks([newUserDeck, newComputerDeck]);
 
@@ -114,7 +119,6 @@ function GameSet() {
 	const round = (userSelectedCard: BeerProps) => {
 		handleUserCardSelect(userSelectedCard);
 	};
-
 
 	// End of game
 
@@ -158,7 +162,11 @@ function GameSet() {
 				{decks[0].length > 0 ? (
 					decks[0].map((beer) => (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-						<article key={`player ${beer.sku}`} className="temp-card" onClick={() => handleUserCardSelect(beer)} >
+						<article
+							key={`player ${beer.sku}`}
+							className="temp-card"
+							onClick={() => handleUserCardSelect(beer)}
+						>
 							<p>{beer.name}</p>
 							<p>{beer.abv}</p>
 						</article>
