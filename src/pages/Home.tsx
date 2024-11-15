@@ -1,3 +1,5 @@
+import React from "react";
+import GameButton from "../component/GameButton";
 import "./Home.css";
 
 function Home() {
@@ -20,13 +22,8 @@ function Home() {
 						attrapez un verre d’eau, installez-vous confortablement, et
 						affrontez l’ordinateur sans modération !
 					</p>
-					<button type="button" id="home-button">
-						Jouer{" "}
-						<img
-							src="src\assets\oktoberfest-beer-glasses-in-barrel-design-free-vector.jpg"
-							alt="logo bière"
-						/>
-					</button>
+
+					<GameButton />
 				</div>
 			</header>
 		</main>
