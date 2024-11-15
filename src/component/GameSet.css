@@ -3,6 +3,31 @@ section.deck {
 	justify-content: space-evenly;
 
 	width: 100%;
+
+	margin: 4rem;
+}
+
+button#reload-decks {
+	background-color: black;
+	border: none;
+	border-radius: 5px;
+	opacity: 60%;
+
+	font-size: 0.8rem;
+	text-decoration: none;
+	color: white;
+
+	position: absolute;
+	top: 1rem;
+	right: 2rem;
+
+	padding: 0.4rem 1.4rem;
+
+	cursor: pointer;
+}
+
+button#reload-decks:hover {
+	opacity: 1;
 }
 
 section.deck article.temp-card {

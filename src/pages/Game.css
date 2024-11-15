@@ -20,7 +20,7 @@ main#game-main section#game-gameset {
 	justify-content: space-between;
 	align-items: center;
 
-	margin: 3rem;
+	position: relative;
 }
 
 main#game-main article#game-rules {
