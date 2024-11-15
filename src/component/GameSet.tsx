@@ -16,11 +16,10 @@ interface BeerProps {
 
 interface GameSetProps {
 	setPopUp: React.Dispatch<React.SetStateAction<boolean>>;
-	setGameDone: React.Dispatch<React.SetStateAction<boolean>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function GameSet({ setPopUp, setGameDone, setAlcoholLevel }: GameSetProps) {
+function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 	const [beers, setBeers] = useState([]);
 	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
 
@@ -129,7 +128,6 @@ function GameSet({ setPopUp, setGameDone, setAlcoholLevel }: GameSetProps) {
 		const roundWinner = compareCard(selectedCard, computerSelectedCard);
 		updateAlcoholLevel(roundWinner, selectedCard);
 		if (newUserDeck.length === 0) {
-			setGameDone(true);
 			setPopUp(true);
 		}
 	};

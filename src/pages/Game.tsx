@@ -9,7 +9,6 @@ import PopUp from "../component/PopUp";
 function Game() {
 	const [welcomePopUp, setWelcomePopUp] = useState<boolean>(true);
 	const [endPopUp, setEndPopUp] = useState<boolean>(false);
-	const [gameDone, setGameDone] = useState<boolean>(false);
 	const [alcoholLevel, setAlcoholLevel] = useState(0);
 
 	return (
@@ -34,11 +33,7 @@ function Game() {
 				</div>
 			</section>
 			<section id="game-gameset">
-				<GameSet
-					setPopUp={setEndPopUp}
-					setGameDone={setGameDone}
-					setAlcoholLevel={setAlcoholLevel}
-				/>
+				<GameSet setPopUp={setEndPopUp} setAlcoholLevel={setAlcoholLevel} />
 			</section>
 			<section>
 				<article id="game-rules">
