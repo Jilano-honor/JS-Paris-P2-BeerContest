@@ -124,13 +124,17 @@ function GameSet() {
 
 	return (
 		<>
+			<button
+				type="button"
+				id="reload-decks"
+				onClick={() => createDecks(beers)}
+			>
+				Recharger les decks
+			</button>
 			<section className="deck" id="computer-deck">
 				{decks[1].length > 0 ? (
 					decks[1].map((beer) => (
-						<article
-							key={`computer-${beer.sku}-${Math.random()}`}
-							className="temp-card"
-						>
+						<article key={`computer ${beer.sku}`} className="temp-card">
 							<p>{beer.name}</p>
 							<p>{beer.abv}</p>
 						</article>
@@ -166,7 +170,7 @@ function GameSet() {
 					decks[0].map((beer) => (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<article
-							key={`player-${beer.sku}-${Math.random()}`}
+							key={`player ${beer.sku}`}
 							className="temp-card"
 							onClick={() => handleUserCardSelect(beer)}
 						>
