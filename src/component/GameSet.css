@@ -13,6 +13,7 @@ button#reload-decks {
 	border-radius: 5px;
 	opacity: 60%;
 
+	font-family: "Hind Vadadora", sans-serif;
 	font-size: 0.8rem;
 	text-decoration: none;
 	color: white;
@@ -44,4 +45,30 @@ section#game-area {
 
 	width: 500px;
 	height: 300px;
+}
+
+section#game-area h3#pick-card {
+	position: absolute;
+	top: 45%;
+	left: 40%;
+
+	font-size: 2rem;
+	text-align: center;
+	color: white;
+	line-height: 2;
+}
+
+div#round-msg {
+	position: absolute;
+	top: 15rem;
+	right: 0;
+	margin: 0 auto;
+
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 200px;
+	padding: 2rem;
+}
+
+div#round-msg h3 {
+	color: white;
 }

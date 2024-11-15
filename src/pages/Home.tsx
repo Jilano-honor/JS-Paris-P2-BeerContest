@@ -1,4 +1,3 @@
-import React from "react";
 import GameButton from "../component/GameButton";
 import "./Home.css";
 

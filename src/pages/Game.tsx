@@ -7,26 +7,46 @@ import GameSet from "../component/GameSet";
 import PopUp from "../component/PopUp";
 
 function Game() {
-	const [popUp, setPopUp] = useState<boolean>(true);
+	const [welcomePopUp, setWelcomePopUp] = useState<boolean>(true);
+	const [endPopUp, setEndPopUp] = useState<boolean>(false);
+	const [gameDone, setGameDone] = useState<boolean>(false);
+	const [alcoholLevel, setAlcoholLevel] = useState(0);
 
 	return (
 		<main id="game-main">
-			{popUp ? <PopUp setPopUp={setPopUp} /> : <></>}
+			{welcomePopUp ? (
+				<PopUp
+					setPopUp={setWelcomePopUp}
+					alcoholLevel={alcoholLevel}
+					msg="welcome"
+				/>
+			) : (
+				<></>
+			)}
+			{endPopUp ? (
+				<PopUp setPopUp={setEndPopUp} alcoholLevel={alcoholLevel} msg="end" />
+			) : (
+				<></>
+			)}
 			<section>
 				<div id="game-alcohol-level">
 					<AlcoholLevel />
 				</div>
 			</section>
 			<section id="game-gameset">
-				<GameSet />
+				<GameSet
+					setPopUp={setEndPopUp}
+					setGameDone={setGameDone}
+					setAlcoholLevel={setAlcoholLevel}
+				/>
 			</section>
 			<section>
 				<article id="game-rules">
 					<h3>Comment jouer ?</h3>
 					<p>
 						Bienvenue dans le jeu des bières ! <br />
-						Jouez 5 manches contre le barman. Chaque défaite augmente votre taux
-						d'alcoolémie virtuel.
+						Jouez 5 manches contre le barman. Le plus bas taux gagne. Chaque
+						défaite augmente votre taux d'alcoolémie virtuel.
 						<br />
 						Bon jeu, et santé !
 					</p>

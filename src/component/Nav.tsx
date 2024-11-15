@@ -9,7 +9,6 @@ function Navigation() {
 			<Link to="/">Accueil</Link>
 			<Link to="/game">Jeu</Link>
 			<Link to="/test">Test</Link>
-			<Link to="/memory">Memory</Link>
 			<Link to="/about">A propos</Link>
 		</nav>
 	);

@@ -1,15 +1,13 @@
-import React from "react";
 import { Link } from "react-router-dom";
+
+import "./GameButton.css";
 
 const GameButton = () => {
 	return (
 		<Link to="/game">
 			<button type="button" id="home-button">
-				Jouer
-				<img
-					src="src/assets/oktoberfest-beer-glasses-in-barrel-design-free-vector.jpg"
-					alt="logo bière"
-				/>
+				<p>Jouer</p>
+				<img src="src/assets/picto-beer.png" alt="logo bière" />
 			</button>
 		</Link>
 	);
