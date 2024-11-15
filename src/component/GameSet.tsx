@@ -134,6 +134,10 @@ function GameSet({ setPopUp, setGameDone, setAlcoholLevel }: GameSetProps) {
 		}
 	};
 
+	const round = (userSelectedCard: BeerProps) => {
+		handleUserCardSelect(userSelectedCard);
+	};
+
 	// End of game
 
 	return (
@@ -148,7 +152,49 @@ function GameSet({ setPopUp, setGameDone, setAlcoholLevel }: GameSetProps) {
 			<section className="deck" id="computer-deck">
 				{decks[1].length > 0 ? (
 					decks[1].map((beer) => (
-						<article key={`computer ${beer.sku}`} className="temp-card">
+						<article
+							key={`computer ${beer.sku}-${Math.random()}`}
+							className="temp-card"
+						>
+							<p>{beer.name}</p>
+							<p>{beer.abv}</p>
+						</article>
+					))
+				) : (
+					<></>
+				)}
+			</section>
+			<section id="game-area">
+				<div id="computer-selected-card">
+					{computerCard ? (
+						<div>
+							<p>{computerCard.name}</p>
+							<p>ABV: {computerCard.abv}</p>
+						</div>
+					) : (
+						<p>en attente de ta card</p>
+					)}
+				</div>
+				<div id="user-selected-card">
+					{userCard ? (
+						<div>
+							<p>{userCard.name}</p>
+							<p>ABV: {userCard.abv}</p>
+						</div>
+					) : (
+						<p>Choisi une card</p>
+					)}
+				</div>
+			</section>
+			<section className="deck" id="user-deck">
+				{decks[0].length > 0 ? (
+					decks[0].map((beer) => (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+						<article
+							key={`player-${beer.sku}-${Math.random()}`}
+							className="temp-card"
+							onClick={() => handleUserCardSelect(beer)}
+						>
 							<p>{beer.name}</p>
 							<p>{beer.abv}</p>
 						</article>
