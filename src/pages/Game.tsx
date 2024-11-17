@@ -40,8 +40,8 @@ function Game() {
 					<h3>Comment jouer ?</h3>
 					<p>
 						Bienvenue dans le jeu des bières ! <br />
-						Jouez 5 manches contre le barman. Le plus bas taux gagne. Chaque
-						défaite augmente votre taux d'alcoolémie virtuel.
+						Joue 5 manches contre le barman. Le plus bas taux gagne. Chaque
+						défaite augmente ton taux d'alcoolémie virtuel.
 						<br />
 						Bon jeu, et santé !
 					</p>

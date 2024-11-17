@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
+import Test from "./pages/Test";
 
 import "./reset.css";
 import "./index.css";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: "/Game",
 				element: <Game />,
+			},
+			{
+				path: "/Test",
+				element: <Test />,
 			},
 		],
 	},

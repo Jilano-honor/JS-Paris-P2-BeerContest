@@ -1,0 +1,76 @@
+@keyframes shuffle {
+	0% {
+		rotate: 0deg;
+	}
+	10% {
+		rotate: 25deg;
+	}
+	20% {
+		rotate: 0deg;
+	}
+	30% {
+		rotate: -25deg;
+	}
+	40% {
+		rotate: 0deg;
+	}
+	50% {
+		rotate: 25deg;
+	}
+	60% {
+		rotate: 0deg;
+	}
+	70% {
+		rotate: -25deg;
+	}
+	80% {
+		rotate: 0deg;
+	}
+	90% {
+		rotate: 0deg;
+	}
+	100% {
+		rotate: 0deg;
+	}
+}
+
+#test-button {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding: 2rem;
+	gap: 5rem;
+	margin-top: 50px;
+	gap: 20px;
+	width: 307px;
+	height: 90px;
+
+	background: linear-gradient(
+		to bottom left,
+		var(--light-color),
+		var(--main-color)
+	);
+	border-radius: 50px;
+	border: inset 10px var(--dark-color);
+
+	cursor: pointer;
+}
+
+#test-button:hover img {
+	animation-name: shuffle;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+}
+
+#test-button p {
+	color: white;
+	font-family: "Marck Script", sans-serif;
+	font-size: 1.5rem;
+}
+
+#test-button img {
+	width: 60px;
+	height: auto;
+	object-fit: contain;
+	border-radius: 90%;
+}
