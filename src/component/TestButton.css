@@ -36,13 +36,17 @@
 
 #test-button {
 	display: flex;
+	gap: 3rem;
+}
+
+#test-button {
+	display: flex;
 	align-items: center;
 	justify-content: end;
-	padding: 2rem;
-	gap: 5rem;
-	margin-top: 50px;
+	padding: 2rem 3rem;
+	margin-top: 40px;
 	gap: 20px;
-	width: 307px;
+	width: 390px;
 	height: 90px;
 
 	background: linear-gradient(
@@ -56,12 +60,6 @@
 	cursor: pointer;
 }
 
-#test-button:hover img {
-	animation-name: shuffle;
-	animation-duration: 0.5s;
-	animation-iteration-count: infinite;
-}
-
 #test-button p {
 	color: white;
 	font-family: "Marck Script", sans-serif;
@@ -69,8 +67,18 @@
 }
 
 #test-button img {
-	width: 60px;
+	width: 40px;
 	height: auto;
 	object-fit: contain;
-	border-radius: 90%;
+	filter: invert(1);
+}
+
+#test-button:hover img {
+	animation-name: shuffle;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+}
+
+#test-button:hover p {
+	color: var(--dark-color);
 }

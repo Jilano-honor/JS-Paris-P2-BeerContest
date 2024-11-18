@@ -6,7 +6,41 @@
 	height: 10vh;
 }
 
-#navigation-bar img {
+#navigation-bar img#logo {
 	width: 10%;
 	mix-blend-mode: multiply;
+}
+
+#navigation-bar a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: .5rem;
+
+	position: relative;
+
+	width: max-content;
+}
+
+#navigation-bar a img.nav-img {
+	width: 60px;
+	opacity: 0.2;
+	filter: grayscale(1);
+	filter: invert(1);
+}
+
+#navigation-bar a:hover img.nav-img {
+	opacity: 0.5;
+}
+
+#navigation-bar a p {
+	font-family: "Marck Script", sans-serif;
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: var(--dark-color);
+
+	position: absolute;
+	top: 40%;
+
+	text-wrap: nowrap;
 }

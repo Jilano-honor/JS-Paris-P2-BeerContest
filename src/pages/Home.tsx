@@ -1,4 +1,4 @@
-import GameButton from "../component/GameButton";
+import HomeButtons from "../component/HomeButtons";
 import "./Home.css";
 
 function Home() {
@@ -6,8 +6,8 @@ function Home() {
 		<main id="main-home">
 			<img
 				src="src\assets\barman.png"
-				alt="Mon personnage"
-				className={"character-image"}
+				alt="Le barman"
+				className="character-image"
 			/>
 
 			<header id="header-home">
@@ -22,7 +22,7 @@ function Home() {
 						l’ordinateur sans modération !
 					</p>
 
-					<GameButton />
+					<HomeButtons />
 				</div>
 			</header>
 		</main>

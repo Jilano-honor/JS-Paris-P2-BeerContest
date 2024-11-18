@@ -34,15 +34,19 @@
 	}
 }
 
-#home-button {
+#home-buttons {
+	display: flex;
+	gap: 3rem;
+}
+
+#home-buttons .home-button {
 	display: flex;
 	align-items: center;
 	justify-content: end;
-	padding: 2rem;
-	gap: 5rem;
-	margin-top: 50px;
+	padding: 2rem 3rem;
+	margin-top: 40px;
 	gap: 20px;
-	width: 307px;
+	width: 280px;
 	height: 90px;
 
 	background: linear-gradient(
@@ -56,21 +60,33 @@
 	cursor: pointer;
 }
 
-#home-button:hover img {
+#home-buttons .home-button p {
+	color: white;
+	font-family: "Marck Script", sans-serif;
+	font-size: 2rem;
+}
+
+#home-buttons .home-button p#deck-button-text {
+	font-size: 1.4rem;
+}
+
+#home-buttons .home-button img {
+	width: 50px;
+	height: auto;
+	object-fit: contain;
+	border-radius: 90%;
+}
+
+#home-buttons .home-button img#logo-deck {
+	filter: invert(1);
+}
+
+#home-buttons .home-button:hover img {
 	animation-name: shuffle;
 	animation-duration: 0.5s;
 	animation-iteration-count: infinite;
 }
 
-#home-button p {
-	color: white;
-	font-family: "Marck Script", sans-serif;
-	font-size: 2.5rem;
-}
-
-#home-button img {
-	width: 80px;
-	height: auto;
-	object-fit: contain;
-	border-radius: 90%;
+#home-buttons .home-button:hover p {
+	color: var(--dark-color);
 }

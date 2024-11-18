@@ -132,10 +132,6 @@ function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 		}
 	};
 
-	const round = (userSelectedCard: BeerProps) => {
-		handleUserCardSelect(userSelectedCard);
-	};
-
 	// End of game
 
 	return (
