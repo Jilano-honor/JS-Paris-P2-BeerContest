@@ -15,12 +15,16 @@ interface BeerProps {
 }
 
 interface GameSetProps {
-	states: { start: number; ingame: number; end: number };
-	setGameState: React.Dispatch<React.SetStateAction<number>>;
+	gameStates: { start: number; ingame: number; end: number };
+	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function GameSet({ states, setGameState, setAlcoholLevel }: GameSetProps) {
+function GameSet({
+	gameStates,
+	setCurrentGameState,
+	setAlcoholLevel,
+}: GameSetProps) {
 	const [beers, setBeers] = useState([]);
 	const [decks, setDecks] = useState<{
 		user: BeerProps[];
@@ -83,27 +87,34 @@ function GameSet({ states, setGameState, setAlcoholLevel }: GameSetProps) {
 	const [userCard, setUserCard] = useState<BeerProps | null>(null);
 	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
 	const [roundMsg, setRoundMsg] = useState<string | null>(null);
+	const ROUND_WINNER = { computer: 0, equality: 1, user: 2 };
 
-	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
+	const compareCard = (
+		userCard: BeerProps,
+		computerCard: BeerProps,
+		ROUND_WINNER: { computer: number; equality: number; user: number },
+	) => {
 		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
 		const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 
-		const winner = { computer: 0, equality: 1, user: 2 };
-		let roundResult = { winner: 0, message: "" };
+		let roundResult: { winner: number; message: string };
 
 		if (computerAbv === userAbv) {
-			roundResult = { winner: winner.equality, message: "C'est égalité !" };
+			roundResult = {
+				winner: ROUND_WINNER.equality,
+				message: "C'est égalité !",
+			};
 		} else if (computerAbv < userAbv) {
-			roundResult = { winner: winner.computer, message: "C'est perdu !" };
+			roundResult = { winner: ROUND_WINNER.computer, message: "C'est perdu !" };
 		} else {
-			roundResult = { winner: winner.user, message: "C'est gagné !" };
+			roundResult = { winner: ROUND_WINNER.user, message: "C'est gagné !" };
 		}
 
 		return roundResult;
 	};
 
 	const updateAlcoholLevel = (winner: number, userCard: BeerProps) => {
-		if (winner === 0) {
+		if (winner === ROUND_WINNER.computer) {
 			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
@@ -121,7 +132,11 @@ function GameSet({ states, setGameState, setAlcoholLevel }: GameSetProps) {
 		setUserCard(selectedCard);
 		setComputerCard(computerSelectedCard);
 
-		const roundResult = compareCard(selectedCard, computerSelectedCard);
+		const roundResult = compareCard(
+			selectedCard,
+			computerSelectedCard,
+			ROUND_WINNER,
+		);
 		updateAlcoholLevel(roundResult.winner, selectedCard);
 		setRoundMsg(roundResult.message);
 		if (decks.user.length === 0) {
@@ -132,7 +147,7 @@ function GameSet({ states, setGameState, setAlcoholLevel }: GameSetProps) {
 	// End of game
 
 	const endGame = () => {
-		setGameState(states.end);
+		setCurrentGameState(gameStates.end);
 	};
 
 	return (

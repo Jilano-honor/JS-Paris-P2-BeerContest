@@ -7,18 +7,20 @@ import GameSet from "../component/GameSet";
 import PopUp from "../component/PopUp";
 
 function Game() {
-	const states = { start: 0, ingame: 1, end: 2 };
+	const GAME_STATES = { start: 0, ingame: 1, end: 2 };
 
-	const [gameState, setGameState] = useState<number>(states.start);
+	const [currentGameState, setCurrentGameState] = useState<number>(
+		GAME_STATES.start,
+	);
 	const [alcoholLevel, setAlcoholLevel] = useState<number>(0);
 
 	return (
 		<main id="game-main">
-			{gameState !== states.ingame ? (
+			{currentGameState !== GAME_STATES.ingame ? (
 				<PopUp
-					gameState={gameState}
-					states={states}
-					setGameState={setGameState}
+					currentGameState={currentGameState}
+					gameStates={GAME_STATES}
+					setCurrentGameState={setCurrentGameState}
 					alcoholLevel={alcoholLevel}
 				/>
 			) : (
@@ -31,8 +33,8 @@ function Game() {
 			</section>
 			<section id="game-gameset">
 				<GameSet
-					states={states}
-					setGameState={setGameState}
+					gameStates={GAME_STATES}
+					setCurrentGameState={setCurrentGameState}
 					setAlcoholLevel={setAlcoholLevel}
 				/>
 			</section>

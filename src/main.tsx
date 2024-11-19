@@ -2,9 +2,9 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
+import Assessment from "./pages/Assessment";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
-import Assessment from "./pages/Assessment";
 
 import "./reset.css";
 import "./index.css";

@@ -3,21 +3,26 @@ import "./PopUp.css";
 import barman from "../assets/barman.png";
 
 interface PopUpProps {
-	gameState: number;
-	states: { start: number; ingame: number; end: number };
-	setGameState: React.Dispatch<React.SetStateAction<number>>;
+	currentGameState: number;
+	gameStates: { start: number; ingame: number; end: number };
+	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
 	alcoholLevel: number;
 }
 
-function PopUp({ gameState, states, setGameState, alcoholLevel }: PopUpProps) {
+function PopUp({
+	currentGameState,
+	gameStates,
+	setCurrentGameState,
+	alcoholLevel,
+}: PopUpProps) {
 	const startGame = () => {
-		setGameState(states.ingame);
+		setCurrentGameState(gameStates.ingame);
 	};
 
 	return (
 		<section id="pop-up">
 			<img src={barman} alt="Un barman accueillant" />
-			{gameState === states.start ? (
+			{currentGameState === gameStates.start ? (
 				<div>
 					<h2>Bienvenue dans le jeu des bières !</h2>
 					<p>
@@ -36,7 +41,7 @@ function PopUp({ gameState, states, setGameState, alcoholLevel }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{gameState === states.end && alcoholLevel < 10 ? (
+			{currentGameState === gameStates.end && alcoholLevel < 10 ? (
 				<div>
 					<h2>Bravo, tu as gardé le contrôle !</h2>
 					<p>
@@ -50,7 +55,7 @@ function PopUp({ gameState, states, setGameState, alcoholLevel }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{gameState === states.end && alcoholLevel >= 25 ? (
+			{currentGameState === gameStates.end && alcoholLevel >= 25 ? (
 				<div>
 					<h2>Ça commence à monter... 🍻</h2>
 					<p>
@@ -64,14 +69,16 @@ function PopUp({ gameState, states, setGameState, alcoholLevel }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{gameState === states.end && alcoholLevel >= 10 && alcoholLevel < 25 ? (
+			{currentGameState === gameStates.end &&
+			alcoholLevel >= 10 &&
+			alcoholLevel < 25 ? (
 				<div>
 					<h2>Oulà, là tu vois double ! 🍺🍺</h2>
 					<p>
 						Mieux vaut t'asseoir un moment et profiter d'un peu d'eau. La
 						prochaine partie attendra un peu que tu reprennes tes esprits !{" "}
 					</p>
-					<button type="button" onClick={startGame} onKeyDown={startGame}>
+					<button type="button" onClick={startGame} onKeyUp={startGame}>
 						Boire un verre d'eau et recommencer une partie
 					</button>
 				</div>
