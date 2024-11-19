@@ -36,3 +36,7 @@ main#game-main section#pop-up div button {
 
 	cursor: pointer;
 }
+
+main#game-main section#pop-up div button:hover {
+	color: white;
+}

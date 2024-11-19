@@ -14,9 +14,22 @@ interface BeerProps {
 	food_pairing: string;
 }
 
-function GameSet() {
+interface GameSetProps {
+	gameStates: { start: number; ingame: number; end: number };
+	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
+	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function GameSet({
+	gameStates,
+	setCurrentGameState,
+	setAlcoholLevel,
+}: GameSetProps) {
 	const [beers, setBeers] = useState([]);
-	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
+	const [decks, setDecks] = useState<{
+		user: BeerProps[];
+		computer: BeerProps[];
+	}>({ user: [], computer: [] });
 
 	const getBeers = useCallback(() => {
 		fetch("http://localhost:3000/data", {
@@ -51,7 +64,7 @@ function GameSet() {
 								beers[Math.floor(Math.random() * beers.length)],
 							);
 				}
-				setDecks([playerDeck, computerDeck]);
+				setDecks({ user: playerDeck, computer: computerDeck });
 			} while (Math.abs(level(playerDeck) - level(computerDeck)) > 2);
 		},
 		[level],
@@ -71,56 +84,71 @@ function GameSet() {
 
 	// Gameplay
 
-	const [alcoholLevel, setAlcoholLevel] = useState(0);
 	const [userCard, setUserCard] = useState<BeerProps | null>(null);
 	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
+	const [roundMsg, setRoundMsg] = useState<string | null>(null);
+	const ROUND_WINNER = { computer: 0, equality: 1, user: 2 };
 
-	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
+	const compareCard = (
+		userCard: BeerProps,
+		computerCard: BeerProps,
+		ROUND_WINNER: { computer: number; equality: number; user: number },
+	) => {
 		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
 		const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
+
+		let roundResult: { winner: number; message: string };
+
 		if (computerAbv === userAbv) {
-			return "egalité";
+			roundResult = {
+				winner: ROUND_WINNER.equality,
+				message: "C'est égalité !",
+			};
+		} else if (computerAbv < userAbv) {
+			roundResult = { winner: ROUND_WINNER.computer, message: "C'est perdu !" };
+		} else {
+			roundResult = { winner: ROUND_WINNER.user, message: "C'est gagné !" };
 		}
-		return computerAbv > userAbv ? "computer" : "user";
+
+		return roundResult;
 	};
 
-	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
-		if (winner === "computer") {
+	const updateAlcoholLevel = (winner: number, userCard: BeerProps) => {
+		if (winner === ROUND_WINNER.computer) {
 			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
 
 	const handleUserCardSelect = (selectedCard: BeerProps) => {
-		const updatedComputerDeck = decks[1];
-		const updatedUserDeck = decks[0];
-
 		const computerSelectedCard =
-			updatedComputerDeck[
-				Math.floor(Math.random() * updatedComputerDeck.length)
-			];
+			decks.computer[Math.floor(Math.random() * decks.computer.length)];
 
-		const newUserDeck = updatedUserDeck.filter(
-			(beer) => beer.sku !== selectedCard.sku,
-		);
-		const newComputerDeck = updatedComputerDeck.filter(
+		decks.user = decks.user.filter((beer) => beer.sku !== selectedCard.sku);
+		decks.computer = decks.computer.filter(
 			(beer) => beer.sku !== computerSelectedCard.sku,
 		);
-
-		setDecks([newUserDeck, newComputerDeck]);
 
 		setUserCard(selectedCard);
 		setComputerCard(computerSelectedCard);
 
-		const roundWinner = compareCard(selectedCard, computerSelectedCard);
-		updateAlcoholLevel(roundWinner, selectedCard);
-	};
-
-	const round = (userSelectedCard: BeerProps) => {
-		handleUserCardSelect(userSelectedCard);
+		const roundResult = compareCard(
+			selectedCard,
+			computerSelectedCard,
+			ROUND_WINNER,
+		);
+		updateAlcoholLevel(roundResult.winner, selectedCard);
+		setRoundMsg(roundResult.message);
+		if (decks.user.length === 0) {
+			endGame();
+		}
 	};
 
 	// End of game
+
+	const endGame = () => {
+		setCurrentGameState(gameStates.end);
+	};
 
 	return (
 		<>
@@ -132,8 +160,8 @@ function GameSet() {
 				Recharger les decks
 			</button>
 			<section className="deck" id="computer-deck">
-				{decks[1].length > 0 ? (
-					decks[1].map((beer) => (
+				{decks.computer.length > 0 ? (
+					decks.computer.map((beer) => (
 						<article
 							key={`computer ${beer.sku}-${Math.random()}`}
 							className="temp-card"
@@ -154,7 +182,7 @@ function GameSet() {
 							<p>ABV: {computerCard.abv}</p>
 						</div>
 					) : (
-						<p>en attente de ta card</p>
+						<></>
 					)}
 				</div>
 				<div id="user-selected-card">
@@ -164,27 +192,44 @@ function GameSet() {
 							<p>ABV: {userCard.abv}</p>
 						</div>
 					) : (
-						<p>Choisi une card</p>
+						<h3 id="pick-card">
+							Choisis une carte <br />v
+						</h3>
 					)}
 				</div>
 			</section>
 			<section className="deck" id="user-deck">
-				{decks[0].length > 0 ? (
-					decks[0].map((beer) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-						<article
-							key={`player-${beer.sku}-${Math.random()}`}
-							className="temp-card"
+				{decks.user.length > 0 ? (
+					decks.user.map((beer) => (
+						<button
+							type="button"
+							className="button-user-cards"
+							key={`player ${beer.sku}`}
 							onClick={() => handleUserCardSelect(beer)}
+							tabIndex={0}
+							onKeyDown={(event) => {
+								if (event.key === " ") {
+									handleUserCardSelect(beer);
+								}
+							}}
 						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
+							<article className="temp-card">
+								<p>{beer.name}</p>
+								<p>{beer.abv}</p>
+							</article>
+						</button>
 					))
 				) : (
 					<></>
 				)}
 			</section>
+			{roundMsg ? (
+				<div id="round-msg">
+					<h3>{roundMsg}</h3>
+				</div>
+			) : (
+				<></>
+			)}
 		</>
 	);
 }

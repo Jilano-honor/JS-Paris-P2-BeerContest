@@ -1,0 +1,6 @@
+#main-assessment {
+	height: 85vh;
+	background-size: cover;
+	background-image: url("/src/assets/accueil_720.jpg");
+	position: relative;
+}
