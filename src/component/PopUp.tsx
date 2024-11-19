@@ -1,24 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
-
 import "./PopUp.css";
 
 import barman from "../assets/barman.png";
 
 interface PopUpProps {
-	setPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+	gameState: number;
+	states: { start: number; ingame: number; end: number };
+	setGameState: React.Dispatch<React.SetStateAction<number>>;
 	alcoholLevel: number;
-	msg: string;
 }
 
-function PopUp({ setPopUp, alcoholLevel, msg }: PopUpProps) {
+function PopUp({ gameState, states, setGameState, alcoholLevel }: PopUpProps) {
 	const startGame = () => {
-		setPopUp(false);
+		setGameState(states.ingame);
 	};
 
 	return (
 		<section id="pop-up">
 			<img src={barman} alt="Un barman accueillant" />
-			{msg === "welcome" ? (
+			{gameState === states.start ? (
 				<div>
 					<h2>Bienvenue dans le jeu des bières !</h2>
 					<p>
@@ -37,7 +36,7 @@ function PopUp({ setPopUp, alcoholLevel, msg }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{msg === "end" && alcoholLevel < 10 ? (
+			{gameState === states.end && alcoholLevel < 10 ? (
 				<div>
 					<h2>Bravo, tu as gardé le contrôle !</h2>
 					<p>
@@ -51,7 +50,7 @@ function PopUp({ setPopUp, alcoholLevel, msg }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{msg === "end" && alcoholLevel >= 25 ? (
+			{gameState === states.end && alcoholLevel >= 25 ? (
 				<div>
 					<h2>Ça commence à monter... 🍻</h2>
 					<p>
@@ -65,7 +64,7 @@ function PopUp({ setPopUp, alcoholLevel, msg }: PopUpProps) {
 			) : (
 				<></>
 			)}
-			{msg === "end" && alcoholLevel >= 10 && alcoholLevel < 25 ? (
+			{gameState === states.end && alcoholLevel >= 10 && alcoholLevel < 25 ? (
 				<div>
 					<h2>Oulà, là tu vois double ! 🍺🍺</h2>
 					<p>

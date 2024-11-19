@@ -1,9 +1,9 @@
-import TestButton from "../component/TestButton";
-import "./Test.css";
+import AssessmentButton from "../component/AssessmentButton";
+import "./Assessment.css";
 
-function Test() {
+function Assessment() {
 	return (
-		<main id="main-test">
+		<main id="main-assessment">
 			<img
 				src="src\assets\barman.png"
 				alt="Mon personnage"
@@ -16,10 +16,10 @@ function Test() {
 					<p className="header-txt">
 						Je vais te poser quelques questions pour déterminer ton deck.
 					</p>
-					<TestButton />
+					<AssessmentButton />
 				</div>
 			</header>
 		</main>
 	);
 }
-export default Test;
+export default Assessment;

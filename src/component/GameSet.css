@@ -58,6 +58,12 @@ section#game-area h3#pick-card {
 	line-height: 2;
 }
 
+.button-user-cards {
+	font: inherit;
+	border: none;
+	padding: 0;
+}
+
 div#round-msg {
 	position: absolute;
 	top: 15rem;

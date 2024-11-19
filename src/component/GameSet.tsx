@@ -15,13 +15,17 @@ interface BeerProps {
 }
 
 interface GameSetProps {
-	setPopUp: React.Dispatch<React.SetStateAction<boolean>>;
+	states: { start: number; ingame: number; end: number };
+	setGameState: React.Dispatch<React.SetStateAction<number>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
 }
 
-function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
+function GameSet({ states, setGameState, setAlcoholLevel }: GameSetProps) {
 	const [beers, setBeers] = useState([]);
-	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
+	const [decks, setDecks] = useState<{
+		user: BeerProps[];
+		computer: BeerProps[];
+	}>({ user: [], computer: [] });
 
 	const getBeers = useCallback(() => {
 		fetch("http://localhost:3000/data", {
@@ -56,7 +60,7 @@ function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 								beers[Math.floor(Math.random() * beers.length)],
 							);
 				}
-				setDecks([playerDeck, computerDeck]);
+				setDecks({ user: playerDeck, computer: computerDeck });
 			} while (Math.abs(level(playerDeck) - level(computerDeck)) > 2);
 		},
 		[level],
@@ -83,56 +87,53 @@ function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
 		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
 		const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
-		let result = "";
+
+		const winner = { computer: 0, equality: 1, user: 2 };
+		let roundResult = { winner: 0, message: "" };
+
 		if (computerAbv === userAbv) {
-			setRoundMsg("C'est égalité !");
-			result = "egalité";
+			roundResult = { winner: winner.equality, message: "C'est égalité !" };
 		} else if (computerAbv < userAbv) {
-			setRoundMsg("C'est perdu !");
-			result = "computer";
+			roundResult = { winner: winner.computer, message: "C'est perdu !" };
 		} else {
-			setRoundMsg("C'est gagné !");
-			result = "user";
+			roundResult = { winner: winner.user, message: "C'est gagné !" };
 		}
-		return result;
+
+		return roundResult;
 	};
 
-	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
-		if (winner === "computer") {
+	const updateAlcoholLevel = (winner: number, userCard: BeerProps) => {
+		if (winner === 0) {
 			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
 
 	const handleUserCardSelect = (selectedCard: BeerProps) => {
-		const updatedComputerDeck = decks[1];
-		const updatedUserDeck = decks[0];
-
 		const computerSelectedCard =
-			updatedComputerDeck[
-				Math.floor(Math.random() * updatedComputerDeck.length)
-			];
+			decks.computer[Math.floor(Math.random() * decks.computer.length)];
 
-		const newUserDeck = updatedUserDeck.filter(
-			(beer) => beer.sku !== selectedCard.sku,
-		);
-		const newComputerDeck = updatedComputerDeck.filter(
+		decks.user = decks.user.filter((beer) => beer.sku !== selectedCard.sku);
+		decks.computer = decks.computer.filter(
 			(beer) => beer.sku !== computerSelectedCard.sku,
 		);
-
-		setDecks([newUserDeck, newComputerDeck]);
 
 		setUserCard(selectedCard);
 		setComputerCard(computerSelectedCard);
 
-		const roundWinner = compareCard(selectedCard, computerSelectedCard);
-		updateAlcoholLevel(roundWinner, selectedCard);
-		if (newUserDeck.length === 0) {
-			setPopUp(true);
+		const roundResult = compareCard(selectedCard, computerSelectedCard);
+		updateAlcoholLevel(roundResult.winner, selectedCard);
+		setRoundMsg(roundResult.message);
+		if (decks.user.length === 0) {
+			endGame();
 		}
 	};
 
 	// End of game
+
+	const endGame = () => {
+		setGameState(states.end);
+	};
 
 	return (
 		<>
@@ -144,8 +145,8 @@ function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 				Recharger les decks
 			</button>
 			<section className="deck" id="computer-deck">
-				{decks[1].length > 0 ? (
-					decks[1].map((beer) => (
+				{decks.computer.length > 0 ? (
+					decks.computer.map((beer) => (
 						<article
 							key={`computer ${beer.sku}-${Math.random()}`}
 							className="temp-card"
@@ -183,17 +184,25 @@ function GameSet({ setPopUp, setAlcoholLevel }: GameSetProps) {
 				</div>
 			</section>
 			<section className="deck" id="user-deck">
-				{decks[0].length > 0 ? (
-					decks[0].map((beer) => (
-						<article
+				{decks.user.length > 0 ? (
+					decks.user.map((beer) => (
+						<button
+							type="button"
+							className="button-user-cards"
 							key={`player ${beer.sku}`}
-							className="temp-card"
 							onClick={() => handleUserCardSelect(beer)}
-							onKeyDown={() => handleUserCardSelect(beer)}
+							tabIndex={0}
+							onKeyDown={(event) => {
+								if (event.key === " ") {
+									handleUserCardSelect(beer);
+								}
+							}}
 						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
+							<article className="temp-card">
+								<p>{beer.name}</p>
+								<p>{beer.abv}</p>
+							</article>
+						</button>
 					))
 				) : (
 					<></>

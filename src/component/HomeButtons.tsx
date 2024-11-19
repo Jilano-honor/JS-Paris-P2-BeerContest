@@ -5,7 +5,7 @@ import "./HomeButtons.css";
 const HomeButtons = () => {
 	return (
 		<div id="home-buttons">
-			<Link to="/game">
+			<Link to="/Test">
 				<button type="button" className="home-button">
 					<p id="deck-button-text">Construire mon deck</p>
 					<img src="src/assets/deck.png" alt="logo deck" id="logo-deck" />

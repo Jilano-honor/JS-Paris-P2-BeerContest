@@ -34,12 +34,12 @@
 	}
 }
 
-#test-button {
+#assessment-button {
 	display: flex;
 	gap: 3rem;
 }
 
-#test-button {
+#assessment-button {
 	display: flex;
 	align-items: center;
 	justify-content: end;
@@ -60,25 +60,25 @@
 	cursor: pointer;
 }
 
-#test-button p {
+#assessment-button p {
 	color: white;
 	font-family: "Marck Script", sans-serif;
 	font-size: 1.5rem;
 }
 
-#test-button img {
+#assessment-button img {
 	width: 40px;
 	height: auto;
 	object-fit: contain;
 	filter: invert(1);
 }
 
-#test-button:hover img {
+#assessment-button:hover img {
 	animation-name: shuffle;
 	animation-duration: 0.5s;
 	animation-iteration-count: infinite;
 }
 
-#test-button:hover p {
+#assessment-button:hover p {
 	color: var(--dark-color);
 }
