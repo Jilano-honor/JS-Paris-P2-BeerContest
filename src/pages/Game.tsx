@@ -33,6 +33,7 @@ function Game() {
 			</section>
 			<section id="game-gameset">
 				<GameSet
+					currentGameState={currentGameState}
 					gameStates={GAME_STATES}
 					setCurrentGameState={setCurrentGameState}
 					setAlcoholLevel={setAlcoholLevel}
