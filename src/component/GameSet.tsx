@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
 
+import { useUserStats } from "../context/UserStats";
+
 interface BeerProps {
 	sku: string;
 	name: string;
@@ -19,6 +21,15 @@ interface GameSetProps {
 	currentGameState: number;
 	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
+	alcoholLevel: number;
+}
+
+interface UserStatsType {
+	gamePlayed: number;
+	alcoholLevelMean: number;
+	gameLowAlcohol: number;
+	gameMiddleAlcohol: number;
+	gameHighAlcohol: number;
 }
 
 function GameSet({
@@ -26,6 +37,7 @@ function GameSet({
 	gameStates,
 	setCurrentGameState,
 	setAlcoholLevel,
+	alcoholLevel,
 }: GameSetProps) {
 	const [beers, setBeers] = useState([]);
 	const [decks, setDecks] = useState<{
@@ -148,16 +160,42 @@ function GameSet({
 
 	// End of game
 
+	const { setUserStats } = useUserStats();
+
 	const endGame = () => {
 		setCurrentGameState(gameStates.end);
 		setRoundMsg(null);
+
+		setUserStats((prevStats: UserStatsType) => ({
+			...prevStats,
+			gamePlayed: prevStats.gamePlayed + 1,
+			alcoholLevelMean: (prevStats.alcoholLevelMean + alcoholLevel) / 2,
+		}));
+
+		if (alcoholLevel < 10) {
+			setUserStats((prevStats: UserStatsType) => ({
+				...prevStats,
+				gameLowAlcohol: prevStats.gameLowAlcohol + 1,
+			}));
+		} else if (alcoholLevel >= 25) {
+			setUserStats((prevStats: UserStatsType) => ({
+				...prevStats,
+				gameHighAlcohol: prevStats.gameHighAlcohol + 1,
+			}));
+		} else {
+			setUserStats((prevStats: UserStatsType) => ({
+				...prevStats,
+				gameMiddleAlcohol: prevStats.gameMiddleAlcohol + 1,
+			}));
+		}
 	};
 
 	return (
 		<>
 			<button
 				type="button"
-				id="reload-decks"
+				className="game-buttons"
+				id="button-reload"
 				onClick={() => createDecks(beers)}
 			>
 				Recharger les decks
