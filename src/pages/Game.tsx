@@ -13,6 +13,12 @@ function Game() {
 	);
 	const [alcoholLevel, setAlcoholLevel] = useState<number>(0);
 	const [statsDisplayed, setStatsDisplayed] = useState<boolean>(false);
+	const ALCOHOL_LEVEL_CAT =
+		alcoholLevel < 10
+			? "gameLowAlcohol"
+			: alcoholLevel >= 25
+				? "gameHighAlcohol"
+				: "gameMiddleAlcohol";
 
 	const showStats = () => {
 		setStatsDisplayed(!statsDisplayed);
@@ -27,7 +33,7 @@ function Game() {
 					currentGameState={currentGameState}
 					gameStates={GAME_STATES}
 					setCurrentGameState={setCurrentGameState}
-					alcoholLevel={alcoholLevel}
+					alcoholLevelCategory={ALCOHOL_LEVEL_CAT}
 				/>
 			) : (
 				<></>
@@ -70,6 +76,7 @@ function Game() {
 					setCurrentGameState={setCurrentGameState}
 					setAlcoholLevel={setAlcoholLevel}
 					alcoholLevel={alcoholLevel}
+					alcoholLevelCategory={ALCOHOL_LEVEL_CAT}
 				/>
 			</section>
 			<section>

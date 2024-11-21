@@ -1,17 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
-
-interface MyContextProps {
-	children: ReactNode;
-}
-
-interface UserStatsType {
-	gamePlayed: number;
-	alcoholLevelMean: number;
-	gameLowAlcohol: number;
-	gameMiddleAlcohol: number;
-	gameHighAlcohol: number;
-}
+import type UserStatsType from "../interface/UserStatsType";
 
 interface UserStatsContextType {
 	userStats: UserStatsType;
@@ -20,7 +9,7 @@ interface UserStatsContextType {
 
 const UserStats = createContext<UserStatsContextType | null>(null);
 
-export function UserStatsProvider({ children }: MyContextProps) {
+export function UserStatsProvider({ children }: { children: ReactNode }) {
 	const [userStats, setUserStats] = useState<UserStatsType>({
 		gamePlayed: 0,
 		alcoholLevelMean: 0,
@@ -39,7 +28,7 @@ export function UserStatsProvider({ children }: MyContextProps) {
 export const useUserStats = () => {
 	const value = useContext(UserStats);
 	if (value == null) {
-		throw new Error("useTheme has to be used within <ThemeProvider>");
+		throw new Error("useUserStats has to be used within <UserStatsProvider>");
 	}
 
 	return value;
