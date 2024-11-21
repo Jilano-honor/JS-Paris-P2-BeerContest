@@ -16,11 +16,13 @@ interface BeerProps {
 
 interface GameSetProps {
 	gameStates: { start: number; ingame: number; end: number };
+	currentGameState: number;
 	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
 }
 
 function GameSet({
+	currentGameState,
 	gameStates,
 	setCurrentGameState,
 	setAlcoholLevel,
@@ -77,10 +79,10 @@ function GameSet({
 	}, [getBeers]);
 
 	useEffect(() => {
-		if (beers.length > 0) {
+		if (beers.length > 0 && currentGameState === gameStates.ingame) {
 			createDecks(beers);
 		}
-	}, [beers, createDecks]);
+	}, [beers, createDecks, currentGameState, gameStates.ingame]);
 
 	// Gameplay
 
@@ -148,6 +150,7 @@ function GameSet({
 
 	const endGame = () => {
 		setCurrentGameState(gameStates.end);
+		setRoundMsg(null);
 	};
 
 	return (
