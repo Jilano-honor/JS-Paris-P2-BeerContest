@@ -2,23 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
 
-interface BeerProps {
-	sku: string;
-	name: string;
-	sub_category_1: string;
-	sub_category_2?: string;
-	sub_category_3?: string;
-	country: string;
-	abv: string;
-	tasting_notes: string;
-	food_pairing: string;
-}
+import { useUserStats } from "../context/UserStats";
+
+import type UserStatsType from "../interface/UserStatsType";
+import type BeerType from "../interface/BeerType";
 
 interface GameSetProps {
 	gameStates: { start: number; ingame: number; end: number };
 	currentGameState: number;
 	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
 	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
+	alcoholLevel: number;
+	alcoholLevelCategory: keyof UserStatsType;
 }
 
 function GameSet({
@@ -26,11 +21,13 @@ function GameSet({
 	gameStates,
 	setCurrentGameState,
 	setAlcoholLevel,
+	alcoholLevel,
+	alcoholLevelCategory,
 }: GameSetProps) {
 	const [beers, setBeers] = useState([]);
 	const [decks, setDecks] = useState<{
-		user: BeerProps[];
-		computer: BeerProps[];
+		user: BeerType[];
+		computer: BeerType[];
 	}>({ user: [], computer: [] });
 
 	const getBeers = useCallback(() => {
@@ -44,8 +41,8 @@ function GameSet({
 			.catch((error) => console.error("Erreur lors du fetch:", error));
 	}, []);
 
-	const level = useCallback((deck: BeerProps[]) => {
-		const deckAbv = deck.map((beer: BeerProps) =>
+	const level = useCallback((deck: BeerType[]) => {
+		const deckAbv = deck.map((beer: BeerType) =>
 			Number.parseFloat(beer.abv.slice(-1)),
 		);
 		const sumAbv = deckAbv.reduce((acc, curr) => acc + curr, 0);
@@ -53,7 +50,7 @@ function GameSet({
 	}, []);
 
 	const createDecks = useCallback(
-		(beers: BeerProps[]) => {
+		(beers: BeerType[]) => {
 			const playerDeck = [];
 			const computerDeck = [];
 			do {
@@ -86,14 +83,14 @@ function GameSet({
 
 	// Gameplay
 
-	const [userCard, setUserCard] = useState<BeerProps | null>(null);
-	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
+	const [userCard, setUserCard] = useState<BeerType | null>(null);
+	const [computerCard, setComputerCard] = useState<BeerType | null>(null);
 	const [roundMsg, setRoundMsg] = useState<string | null>(null);
 	const ROUND_WINNER = { computer: 0, equality: 1, user: 2 };
 
 	const compareCard = (
-		userCard: BeerProps,
-		computerCard: BeerProps,
+		userCard: BeerType,
+		computerCard: BeerType,
 		ROUND_WINNER: { computer: number; equality: number; user: number },
 	) => {
 		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
@@ -115,14 +112,14 @@ function GameSet({
 		return roundResult;
 	};
 
-	const updateAlcoholLevel = (winner: number, userCard: BeerProps) => {
+	const updateAlcoholLevel = (winner: number, userCard: BeerType) => {
 		if (winner === ROUND_WINNER.computer) {
 			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
 
-	const handleUserCardSelect = (selectedCard: BeerProps) => {
+	const handleUserCardSelect = (selectedCard: BeerType) => {
 		const computerSelectedCard =
 			decks.computer[Math.floor(Math.random() * decks.computer.length)];
 
@@ -148,16 +145,26 @@ function GameSet({
 
 	// End of game
 
+	const { setUserStats } = useUserStats();
+
 	const endGame = () => {
 		setCurrentGameState(gameStates.end);
 		setRoundMsg(null);
+
+		setUserStats((prevStats: UserStatsType) => ({
+			...prevStats,
+			gamePlayed: prevStats.gamePlayed + 1,
+			alcoholLevelMean: (prevStats.alcoholLevelMean + alcoholLevel) / 2,
+			[alcoholLevelCategory]: prevStats[alcoholLevelCategory] + 1,
+		}));
 	};
 
 	return (
 		<>
 			<button
 				type="button"
-				id="reload-decks"
+				className="game-buttons"
+				id="button-reload"
 				onClick={() => createDecks(beers)}
 			>
 				Recharger les decks

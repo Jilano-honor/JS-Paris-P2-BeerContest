@@ -6,14 +6,14 @@ interface PopUpProps {
 	currentGameState: number;
 	gameStates: { start: number; ingame: number; end: number };
 	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
-	alcoholLevel: number;
+	alcoholLevelCategory: string;
 }
 
 function PopUp({
 	currentGameState,
 	gameStates,
 	setCurrentGameState,
-	alcoholLevel,
+	alcoholLevelCategory,
 }: PopUpProps) {
 	const startGame = () => {
 		setCurrentGameState(gameStates.ingame);
@@ -41,7 +41,8 @@ function PopUp({
 			) : (
 				<></>
 			)}
-			{currentGameState === gameStates.end && alcoholLevel < 10 ? (
+			{currentGameState === gameStates.end &&
+			alcoholLevelCategory === "gameLowAlcohol" ? (
 				<div>
 					<h2>Bravo, tu as gardé le contrôle !</h2>
 					<p>
@@ -55,7 +56,8 @@ function PopUp({
 			) : (
 				<></>
 			)}
-			{currentGameState === gameStates.end && alcoholLevel >= 25 ? (
+			{currentGameState === gameStates.end &&
+			alcoholLevelCategory === "gameMiddleAlcohol" ? (
 				<div>
 					<h2>Ça commence à monter... 🍻</h2>
 					<p>
@@ -70,8 +72,7 @@ function PopUp({
 				<></>
 			)}
 			{currentGameState === gameStates.end &&
-			alcoholLevel >= 10 &&
-			alcoholLevel < 25 ? (
+			alcoholLevelCategory === "gameHighAlcohol" ? (
 				<div>
 					<h2>Oulà, là tu vois double ! 🍺🍺</h2>
 					<p>
