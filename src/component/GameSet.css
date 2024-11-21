@@ -45,3 +45,286 @@ section#game-area {
 	width: 500px;
 	height: 300px;
 }
+
+section#game-alcohol-level {
+	position: absolute;
+	right: 75%;
+	top: 35%;
+}
+img#imagealcohollevel {
+	height: 250px;
+}
+div#progresse-bar {
+	position: absolute;
+	bottom: 60px;
+	right: 85px;
+}
+#verticale-bar {
+	width: 90px;
+	background-color: rgb(255, 217, 0);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	opacity: 0.75;
+	transition: all 1.5s linear;
+}
+
+.drunk-light {
+	animation: drunkLight 2.5s ease-in-out infinite;
+	filter: blur(1px);
+}
+
+.drunk-medium {
+	animation: drunkMedium 2s ease-in-out infinite;
+	filter: blur(1.25px);
+}
+
+.drunk-high {
+	animation: drunkHigh 1.5s ease-in-out infinite;
+	filter: blur(1.5px);
+}
+
+.drunk-very-high {
+	animation: drunkVeryHigh 1s ease-in-out infinite;
+	filter: blur(1.75px);
+}
+
+.drunk-extreme {
+	animation: drunkExtreme 0.5s ease-in-out infinite;
+	filter: blur(2px);
+}
+
+@keyframes drunkLight {
+	0% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+	10% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(12px);
+	}
+	20% {
+		transform: rotate(-2deg) translate(-5px, -5px);
+		filter: blur(12px);
+	}
+	30% {
+		transform: rotate(3deg) translate(10px, -10px);
+		filter: blur(10px);
+	}
+	40% {
+		transform: rotate(-3deg) translate(-10px, 10px);
+		filter: blur(12px);
+	}
+	50% {
+		transform: rotate(4deg) translate(15px, -15px);
+		filter: blur(10px);
+	}
+	60% {
+		transform: rotate(-4deg) translate(-15px, 15px);
+		filter: blur(12px);
+	}
+	70% {
+		transform: rotate(5deg) translate(20px, -20px);
+		filter: blur(10px);
+	}
+	80% {
+		transform: rotate(-5deg) translate(-20px, 20px);
+		filter: blur(12px);
+	}
+	90% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(10px);
+	}
+	100% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+}
+@keyframes drunkMedium {
+	0% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+	10% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(12px);
+	}
+	20% {
+		transform: rotate(-2deg) translate(-5px, -5px);
+		filter: blur(12px);
+	}
+	30% {
+		transform: rotate(3deg) translate(10px, -10px);
+		filter: blur(10px);
+	}
+	40% {
+		transform: rotate(-3deg) translate(-10px, 10px);
+		filter: blur(12px);
+	}
+	50% {
+		transform: rotate(4deg) translate(15px, -15px);
+		filter: blur(10px);
+	}
+	60% {
+		transform: rotate(-4deg) translate(-15px, 15px);
+		filter: blur(12px);
+	}
+	70% {
+		transform: rotate(5deg) translate(20px, -20px);
+		filter: blur(10px);
+	}
+	80% {
+		transform: rotate(-5deg) translate(-20px, 20px);
+		filter: blur(12px);
+	}
+	90% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(10px);
+	}
+	100% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkHigh {
+	0% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+	10% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(12px);
+	}
+	20% {
+		transform: rotate(-2deg) translate(-5px, -5px);
+		filter: blur(12px);
+	}
+	30% {
+		transform: rotate(3deg) translate(10px, -10px);
+		filter: blur(10px);
+	}
+	40% {
+		transform: rotate(-3deg) translate(-10px, 10px);
+		filter: blur(12px);
+	}
+	50% {
+		transform: rotate(4deg) translate(15px, -15px);
+		filter: blur(10px);
+	}
+	60% {
+		transform: rotate(-4deg) translate(-15px, 15px);
+		filter: blur(12px);
+	}
+	70% {
+		transform: rotate(5deg) translate(20px, -20px);
+		filter: blur(10px);
+	}
+	80% {
+		transform: rotate(-5deg) translate(-20px, 20px);
+		filter: blur(12px);
+	}
+	90% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(10px);
+	}
+	100% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkVeryHigh {
+	0% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+	10% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(12px);
+	}
+	20% {
+		transform: rotate(-2deg) translate(-5px, -5px);
+		filter: blur(12px);
+	}
+	30% {
+		transform: rotate(3deg) translate(10px, -10px);
+		filter: blur(10px);
+	}
+	40% {
+		transform: rotate(-3deg) translate(-10px, 10px);
+		filter: blur(12px);
+	}
+	50% {
+		transform: rotate(4deg) translate(15px, -15px);
+		filter: blur(10px);
+	}
+	60% {
+		transform: rotate(-4deg) translate(-15px, 15px);
+		filter: blur(12px);
+	}
+	70% {
+		transform: rotate(5deg) translate(20px, -20px);
+		filter: blur(10px);
+	}
+	80% {
+		transform: rotate(-5deg) translate(-20px, 20px);
+		filter: blur(12px);
+	}
+	90% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(10px);
+	}
+	100% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkExtreme {
+	0% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+	10% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(12px);
+	}
+	20% {
+		transform: rotate(-2deg) translate(-5px, -5px);
+		filter: blur(12px);
+	}
+	30% {
+		transform: rotate(3deg) translate(10px, -10px);
+		filter: blur(10px);
+	}
+	40% {
+		transform: rotate(-3deg) translate(-10px, 10px);
+		filter: blur(12px);
+	}
+	50% {
+		transform: rotate(4deg) translate(15px, -15px);
+		filter: blur(10px);
+	}
+	60% {
+		transform: rotate(-4deg) translate(-15px, 15px);
+		filter: blur(12px);
+	}
+	70% {
+		transform: rotate(5deg) translate(20px, -20px);
+		filter: blur(10px);
+	}
+	80% {
+		transform: rotate(-5deg) translate(-20px, 20px);
+		filter: blur(12px);
+	}
+	90% {
+		transform: rotate(2deg) translate(5px, 5px);
+		filter: blur(10px);
+	}
+	100% {
+		transform: rotate(0deg) translate(0, 0);
+		filter: blur(0);
+	}
+}

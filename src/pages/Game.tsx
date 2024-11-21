@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import "./Game.css";
 
-import AlcoholLevel from "../component/AlcoholLevel";
 import GameSet from "../component/GameSet";
 import PopUp from "../component/PopUp";
 
@@ -12,11 +11,6 @@ function Game() {
 	return (
 		<main id="game-main">
 			{popUp ? <PopUp setPopUp={setPopUp} /> : <></>}
-			<section>
-				<div id="game-alcohol-level">
-					<AlcoholLevel />
-				</div>
-			</section>
 			<section id="game-gameset">
 				<GameSet />
 			</section>

@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
 
+import imagealcohollevel from "./../assets/Beer-game-AlcoholLeve.png";
+
 interface BeerProps {
 	sku: string;
 	name: string;
@@ -81,7 +83,7 @@ function GameSet() {
 		if (computerAbv === userAbv) {
 			return "egalité";
 		}
-		return computerAbv > userAbv ? "computer" : "user";
+		return computerAbv < userAbv ? "computer" : "user";
 	};
 
 	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
@@ -100,12 +102,20 @@ function GameSet() {
 				Math.floor(Math.random() * updatedComputerDeck.length)
 			];
 
-		const newUserDeck = updatedUserDeck.filter(
-			(beer) => beer.sku !== selectedCard.sku,
+		const userCardIndex = updatedUserDeck.findIndex(
+			(beer) => beer.sku === selectedCard.sku,
 		);
-		const newComputerDeck = updatedComputerDeck.filter(
-			(beer) => beer.sku !== computerSelectedCard.sku,
+		const newUserDeck = [
+			...updatedUserDeck.slice(0, userCardIndex),
+			...updatedUserDeck.slice(userCardIndex + 1),
+		];
+		const computerCardIndex = updatedComputerDeck.findIndex(
+			(beer) => beer.sku === computerSelectedCard.sku,
 		);
+		const newComputerDeck = [
+			...updatedComputerDeck.slice(0, computerCardIndex),
+			...updatedComputerDeck.slice(computerCardIndex + 1),
+		];
 
 		setDecks([newUserDeck, newComputerDeck]);
 
@@ -116,14 +126,24 @@ function GameSet() {
 		updateAlcoholLevel(roundWinner, selectedCard);
 	};
 
-	const round = (userSelectedCard: BeerProps) => {
-		handleUserCardSelect(userSelectedCard);
-	};
+	//Alcohol level
 
 	// End of game
 
 	return (
 		<>
+			<section id="game-alcohol-level">
+				<img
+					src={imagealcohollevel}
+					alt="imagealcohollevel"
+					id="imagealcohollevel"
+				/>
+				<div id="progresse-bar">
+					<div id="verticale-bar" style={{ height: `${alcoholLevel} ` * 4.5 }}>
+						{alcoholLevel}%
+					</div>
+				</div>
+			</section>
 			<button
 				type="button"
 				id="reload-decks"
@@ -133,19 +153,35 @@ function GameSet() {
 			</button>
 			<section className="deck" id="computer-deck">
 				{decks[1].length > 0 ? (
-					decks[1].map((beer) => (
-						<article
-							key={`computer ${beer.sku}-${Math.random()}`}
-							className="temp-card"
-						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
-					))
+					decks[1].map((beer) => {
+						let drunkEffectClass = "";
+						if (alcoholLevel >= 5 && alcoholLevel < 10) {
+							drunkEffectClass = "drunk-light";
+						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
+							drunkEffectClass = "drunk-medium";
+						} else if (alcoholLevel >= 15 && alcoholLevel < 20) {
+							drunkEffectClass = "drunk-high";
+						} else if (alcoholLevel >= 20 && alcoholLevel < 25) {
+							drunkEffectClass = "drunk-very-high";
+						} else if (alcoholLevel >= 25) {
+							drunkEffectClass = "drunk-extreme";
+						}
+
+						return (
+							<article
+								key={`computer ${beer.sku}`}
+								className={`temp-card ${drunkEffectClass}`}
+							>
+								<p>{beer.name}</p>
+								<p>{beer.abv}%</p>
+							</article>
+						);
+					})
 				) : (
 					<></>
 				)}
 			</section>
+
 			<section id="game-area">
 				<div id="computer-selected-card">
 					{computerCard ? (
@@ -170,17 +206,32 @@ function GameSet() {
 			</section>
 			<section className="deck" id="user-deck">
 				{decks[0].length > 0 ? (
-					decks[0].map((beer) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-						<article
-							key={`player-${beer.sku}-${Math.random()}`}
-							className="temp-card"
-							onClick={() => handleUserCardSelect(beer)}
-						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
-					))
+					decks[0].map((beer) => {
+						let drunkEffectClass = "";
+						if (alcoholLevel >= 5 && alcoholLevel < 10) {
+							drunkEffectClass = "drunk-light";
+						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
+							drunkEffectClass = "drunk-medium";
+						} else if (alcoholLevel >= 15 && alcoholLevel < 20) {
+							drunkEffectClass = "drunk-high";
+						} else if (alcoholLevel >= 20 && alcoholLevel < 25) {
+							drunkEffectClass = "drunk-very-high";
+						} else if (alcoholLevel >= 25) {
+							drunkEffectClass = "drunk-extreme";
+						}
+
+						return (
+							// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+							<article
+								key={`player-${beer.sku}`}
+								className={`temp-card ${drunkEffectClass}`}
+								onClick={() => handleUserCardSelect(beer)}
+							>
+								<p>{beer.name}</p>
+								<p>{beer.abv}</p>
+							</article>
+						);
+					})
 				) : (
 					<></>
 				)}
