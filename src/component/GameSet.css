@@ -84,6 +84,13 @@ div#progresse-bar {
 	opacity: 0.75;
 	transition: all 1.5s linear;
 }
+#progresse-alcohol-level {
+	display: inline-block;
+	font-size: x-large;
+	position: relative;
+	left: -80px;
+	top: -60px;
+}
 .drunk-light {
 	animation: drunkLight 2.5s ease-in-out infinite;
 	filter: blur(1px);

@@ -179,6 +179,7 @@ function GameSet({
 	const endGame = () => {
 		setCurrentGameState(gameStates.end);
 		setRoundMsg(null);
+		setAlcoholLevel(0);
 
 		setUserStats((prevStats: UserStatsType) => ({
 			...prevStats,
@@ -197,9 +198,11 @@ function GameSet({
 					id="imagealcohollevel"
 				/>
 				<div id="progresse-bar">
-					<div id="verticale-bar" style={{ height: `${alcoholLevel} ` * 4.5 }}>
-						{alcoholLevel}%
-					</div>
+					<div
+						id="verticale-bar"
+						style={{ height: `${alcoholLevel} ` * 4.5 }}
+					/>
+					<div id="progresse-alcohol-level">{alcoholLevel}%</div>
 				</div>
 			</section>
 			<button
@@ -228,7 +231,7 @@ function GameSet({
 
 						return (
 							<article
-								key={`computer ${beer.sku}`}
+								key={`player ${beer.sku} ${Math.random()}`}
 								className={`temp-card ${drunkEffectClass}`}
 							>
 								<p>{beer.name}</p>
@@ -286,7 +289,7 @@ function GameSet({
 							<button
 								type="button"
 								className="button-user-cards"
-								key={`player ${beer.sku}`}
+								key={`player ${beer.sku} ${Math.random()}`}
 								onClick={() => handleUserCardSelect(beer)}
 								tabIndex={0}
 								onKeyDown={(event) => {
