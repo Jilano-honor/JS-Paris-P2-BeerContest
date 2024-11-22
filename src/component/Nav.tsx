@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 import "../component/Nav.css";
 
+import logo from "../assets/Beer Contest.png";
 import burger from "../assets/burger.png";
 import close from "../assets/close.png";
-import logo from "../assets/Beer Contest.png";
 import information from "../assets/picto-about.png";
 import play from "../assets/picto-game.png";
 import home from "../assets/picto-home.png";
