@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
+import BeerCard from "./BeerCard";
 
 import { useUserStats } from "../context/UserStats";
 
@@ -172,13 +173,10 @@ function GameSet({
 			<section className="deck" id="computer-deck">
 				{decks.computer.length > 0 ? (
 					decks.computer.map((beer) => (
-						<article
+						<BeerCard
 							key={`computer ${beer.sku}-${Math.random()}`}
-							className="temp-card"
-						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
+							beer={beer}
+						/>
 					))
 				) : (
 					<></>
@@ -186,21 +184,12 @@ function GameSet({
 			</section>
 			<section id="game-area">
 				<div id="computer-selected-card">
-					{computerCard ? (
-						<div>
-							<p>{computerCard.name}</p>
-							<p>ABV: {computerCard.abv}</p>
-						</div>
-					) : (
-						<></>
-					)}
+					{computerCard ? <BeerCard beer={computerCard} /> : <></>}
 				</div>
 				<div id="user-selected-card">
+					export default GameSet; export default GameSet;
 					{userCard ? (
-						<div>
-							<p>{userCard.name}</p>
-							<p>ABV: {userCard.abv}</p>
-						</div>
+						<BeerCard beer={userCard} />
 					) : (
 						<h3 id="pick-card">
 							Choisis une carte <br />v
@@ -211,23 +200,11 @@ function GameSet({
 			<section className="deck" id="user-deck">
 				{decks.user.length > 0 ? (
 					decks.user.map((beer) => (
-						<button
-							type="button"
-							className="button-user-cards"
-							key={`player ${beer.sku}`}
-							onClick={() => handleUserCardSelect(beer)}
-							tabIndex={0}
-							onKeyDown={(event) => {
-								if (event.key === " ") {
-									handleUserCardSelect(beer);
-								}
-							}}
-						>
-							<article className="temp-card">
-								<p>{beer.name}</p>
-								<p>{beer.abv}</p>
-							</article>
-						</button>
+						<BeerCard
+							key={`player-${beer.sku}-${Math.random()}`}
+							beer={beer}
+							handleUserCardSelect={handleUserCardSelect}
+						/>
 					))
 				) : (
 					<></>
