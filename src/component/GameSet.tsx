@@ -159,7 +159,6 @@ function GameSet() {
 			<section className="deck" id="user-deck">
 				{decks[0].length > 0 ? (
 					decks[0].map((beer) => (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
 						<BeerCard
 							key={`player-${beer.sku}-${Math.random()}`}
 							beer={beer}

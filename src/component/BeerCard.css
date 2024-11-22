@@ -33,7 +33,7 @@
 }
 
 .container-name h2 {
-	font-family: "Calligraffitti", "sans cerif";
+	font-family: "Calligraffitti", sans-serif;
 
 	font-size: 12px;
 	color: rgba(206, 200, 200, 0.966);
@@ -70,7 +70,7 @@
 }
 
 .container-I-card h3 {
-	font-family: "Calligraffitti", "sans cerif";
+	font-family: "Calligraffitti", sans-serif;
 	font-size: 17px;
 	color: rgba(206, 200, 200, 0.966);
 }
