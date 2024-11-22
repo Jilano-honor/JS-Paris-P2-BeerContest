@@ -2,23 +2,34 @@ import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
 
-import imagealcohollevel from "./../assets/Beer-game-AlcoholLeve.png";
+import { useUserStats } from "../context/UserStats";
 
-interface BeerProps {
-	sku: string;
-	name: string;
-	sub_category_1: string;
-	sub_category_2?: string;
-	sub_category_3?: string;
-	country: string;
-	abv: string;
-	tasting_notes: string;
-	food_pairing: string;
+import imagealcohollevel from "../assets/Beer-game-AlcoholLeve.png";
+import type BeerType from "../interface/BeerType";
+import type UserStatsType from "../interface/UserStatsType";
+
+interface GameSetProps {
+	gameStates: { start: number; ingame: number; end: number };
+	currentGameState: number;
+	setCurrentGameState: React.Dispatch<React.SetStateAction<number>>;
+	setAlcoholLevel: React.Dispatch<React.SetStateAction<number>>;
+	alcoholLevel: number;
+	alcoholLevelCategory: keyof UserStatsType;
 }
 
-function GameSet() {
+function GameSet({
+	currentGameState,
+	gameStates,
+	setCurrentGameState,
+	setAlcoholLevel,
+	alcoholLevel,
+	alcoholLevelCategory,
+}: GameSetProps) {
 	const [beers, setBeers] = useState([]);
-	const [decks, setDecks] = useState<[BeerProps[], BeerProps[]]>([[], []]);
+	const [decks, setDecks] = useState<{
+		user: BeerType[];
+		computer: BeerType[];
+	}>({ user: [], computer: [] });
 
 	const getBeers = useCallback(() => {
 		fetch("http://localhost:3000/data", {
@@ -31,8 +42,8 @@ function GameSet() {
 			.catch((error) => console.error("Erreur lors du fetch:", error));
 	}, []);
 
-	const level = useCallback((deck: BeerProps[]) => {
-		const deckAbv = deck.map((beer: BeerProps) =>
+	const level = useCallback((deck: BeerType[]) => {
+		const deckAbv = deck.map((beer: BeerType) =>
 			Number.parseFloat(beer.abv.slice(-1)),
 		);
 		const sumAbv = deckAbv.reduce((acc, curr) => acc + curr, 0);
@@ -40,7 +51,7 @@ function GameSet() {
 	}, []);
 
 	const createDecks = useCallback(
-		(beers: BeerProps[]) => {
+		(beers: BeerType[]) => {
 			const playerDeck = [];
 			const computerDeck = [];
 			do {
@@ -53,7 +64,7 @@ function GameSet() {
 								beers[Math.floor(Math.random() * beers.length)],
 							);
 				}
-				setDecks([playerDeck, computerDeck]);
+				setDecks({ user: playerDeck, computer: computerDeck });
 			} while (Math.abs(level(playerDeck) - level(computerDeck)) > 2);
 		},
 		[level],
@@ -66,38 +77,54 @@ function GameSet() {
 	}, [getBeers]);
 
 	useEffect(() => {
-		if (beers.length > 0) {
+		if (beers.length > 0 && currentGameState === gameStates.ingame) {
 			createDecks(beers);
 		}
-	}, [beers, createDecks]);
+	}, [beers, createDecks, currentGameState, gameStates.ingame]);
 
 	// Gameplay
 
-	const [alcoholLevel, setAlcoholLevel] = useState(0);
-	const [userCard, setUserCard] = useState<BeerProps | null>(null);
-	const [computerCard, setComputerCard] = useState<BeerProps | null>(null);
+	const [userCard, setUserCard] = useState<BeerType | null>(null);
+	const [computerCard, setComputerCard] = useState<BeerType | null>(null);
+	const [roundMsg, setRoundMsg] = useState<string | null>(null);
+	const ROUND_WINNER = { computer: 0, equality: 1, user: 2 };
 
-	const compareCard = (userCard: BeerProps, computerCard: BeerProps) => {
+	const compareCard = (
+		userCard: BeerType,
+		computerCard: BeerType,
+		ROUND_WINNER: { computer: number; equality: number; user: number },
+	) => {
 		const computerAbv = Number.parseFloat(computerCard.abv.replace("%", ""));
 		const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
+
+		let roundResult: { winner: number; message: string };
+
 		if (computerAbv === userAbv) {
-			return "egalité";
+			roundResult = {
+				winner: ROUND_WINNER.equality,
+				message: "C'est égalité !",
+			};
+		} else if (computerAbv < userAbv) {
+			roundResult = { winner: ROUND_WINNER.computer, message: "C'est perdu !" };
+		} else {
+			roundResult = { winner: ROUND_WINNER.user, message: "C'est gagné !" };
 		}
-		return computerAbv < userAbv ? "computer" : "user";
+
+		return roundResult;
 	};
 
-	const updateAlcoholLevel = (winner: string, userCard: BeerProps) => {
-		if (winner === "computer") {
+	const updateAlcoholLevel = (winner: number, userCard: BeerType) => {
+		if (winner === ROUND_WINNER.computer) {
 			const userAbv = Number.parseFloat(userCard.abv.replace("%", ""));
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
 	useEffect(() => {
 		if (alcoholLevel >= 15) {
-			setDecks(([userDeck, computerDeck]) => [
-				shuffleDeck(userDeck),
-				shuffleDeck(computerDeck),
-			]);
+			setDecks((prevDecks) => ({
+				user: shuffleDeck(prevDecks.user),
+				computer: shuffleDeck(prevDecks.computer),
+			}));
 		}
 	}, [alcoholLevel]);
 	const shuffleDeck = (deck: BeerProps[]) => {
@@ -108,43 +135,58 @@ function GameSet() {
 		}
 		return shuffledDeck;
 	};
-
-	const handleUserCardSelect = (selectedCard: BeerProps) => {
-		const updatedComputerDeck = decks[1];
-		const updatedUserDeck = decks[0];
-
+	const handleUserCardSelect = (selectedCard: BeerType) => {
 		const computerSelectedCard =
-			updatedComputerDeck[
-				Math.floor(Math.random() * updatedComputerDeck.length)
-			];
+			decks.computer[Math.floor(Math.random() * decks.computer.length)];
 
-		const userCardIndex = updatedUserDeck.findIndex(
+		const userCardIndex = decks.user.findIndex(
 			(beer) => beer.sku === selectedCard.sku,
 		);
 		const newUserDeck = [
-			...updatedUserDeck.slice(0, userCardIndex),
-			...updatedUserDeck.slice(userCardIndex + 1),
+			...decks.user.slice(0, userCardIndex),
+			...decks.user.slice(userCardIndex + 1),
 		];
-		const computerCardIndex = updatedComputerDeck.findIndex(
+		const computerCardIndex = decks.computer.findIndex(
 			(beer) => beer.sku === computerSelectedCard.sku,
 		);
 		const newComputerDeck = [
-			...updatedComputerDeck.slice(0, computerCardIndex),
-			...updatedComputerDeck.slice(computerCardIndex + 1),
+			...decks.computer.slice(0, computerCardIndex),
+			...decks.computer.slice(computerCardIndex + 1),
 		];
 
-		setDecks([newUserDeck, newComputerDeck]);
+		setDecks({ user: newUserDeck, computer: newComputerDeck });
 
 		setUserCard(selectedCard);
 		setComputerCard(computerSelectedCard);
 
-		const roundWinner = compareCard(selectedCard, computerSelectedCard);
-		updateAlcoholLevel(roundWinner, selectedCard);
+		const roundResult = compareCard(
+			selectedCard,
+			computerSelectedCard,
+			ROUND_WINNER,
+		);
+		updateAlcoholLevel(roundResult.winner, selectedCard);
+		setRoundMsg(roundResult.message);
+
+		if (newUserDeck.length === 0) {
+			endGame();
+		}
 	};
 
-	//Alcohol level
-
 	// End of game
+
+	const { setUserStats } = useUserStats();
+
+	const endGame = () => {
+		setCurrentGameState(gameStates.end);
+		setRoundMsg(null);
+
+		setUserStats((prevStats: UserStatsType) => ({
+			...prevStats,
+			gamePlayed: prevStats.gamePlayed + 1,
+			alcoholLevelMean: (prevStats.alcoholLevelMean + alcoholLevel) / 2,
+			[alcoholLevelCategory]: prevStats[alcoholLevelCategory] + 1,
+		}));
+	};
 
 	return (
 		<>
@@ -162,14 +204,15 @@ function GameSet() {
 			</section>
 			<button
 				type="button"
-				id="reload-decks"
+				className="game-buttons"
+				id="button-reload"
 				onClick={() => createDecks(beers)}
 			>
 				Recharger les decks
 			</button>
 			<section className="deck" id="computer-deck">
-				{decks[1].length > 0 ? (
-					decks[1].map((beer) => {
+				{decks.computer.length > 0 ? (
+					decks.computer.map((beer) => {
 						let drunkEffectClass = "";
 						if (alcoholLevel >= 5 && alcoholLevel < 10) {
 							drunkEffectClass = "drunk-light";
@@ -206,7 +249,7 @@ function GameSet() {
 							<p>ABV: {computerCard.abv}</p>
 						</div>
 					) : (
-						<p>en attente de ta card</p>
+						<></>
 					)}
 				</div>
 				<div id="user-selected-card">
@@ -216,14 +259,17 @@ function GameSet() {
 							<p>ABV: {userCard.abv}</p>
 						</div>
 					) : (
-						<p>Choisi une card</p>
+						<h3 id="pick-card">
+							Choisis une carte <br />v
+						</h3>
 					)}
 				</div>
 			</section>
 			<section className="deck" id="user-deck">
-				{decks[0].length > 0 ? (
-					decks[0].map((beer) => {
+				{decks.user.length > 0 ? (
+					decks.user.map((beer) => {
 						let drunkEffectClass = "";
+
 						if (alcoholLevel >= 5 && alcoholLevel < 10) {
 							drunkEffectClass = "drunk-light";
 						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
@@ -237,21 +283,36 @@ function GameSet() {
 						}
 
 						return (
-							// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-							<article
-								key={`player-${beer.sku}`}
-								className={`temp-card ${drunkEffectClass}`}
+							<button
+								type="button"
+								className="button-user-cards"
+								key={`player ${beer.sku}`}
 								onClick={() => handleUserCardSelect(beer)}
+								tabIndex={0}
+								onKeyDown={(event) => {
+									if (event.key === " ") {
+										handleUserCardSelect(beer);
+									}
+								}}
 							>
-								<p>{beer.name}</p>
-								<p>{beer.abv}</p>
-							</article>
+								<article className={`temp-card ${drunkEffectClass}`}>
+									<p>{beer.name}</p>
+									<p>{beer.abv}</p>
+								</article>
+							</button>
 						);
 					})
 				) : (
 					<></>
 				)}
 			</section>
+			{roundMsg ? (
+				<div id="round-msg">
+					<h3>{roundMsg}</h3>
+				</div>
+			) : (
+				<></>
+			)}
 		</>
 	);
 }
