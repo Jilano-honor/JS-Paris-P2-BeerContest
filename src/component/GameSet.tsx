@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 import "./GameSet.css";
+import BeerCard from "./BeerCard";
 
 interface BeerProps {
 	sku: string;
@@ -134,13 +135,10 @@ function GameSet() {
 			<section className="deck" id="computer-deck">
 				{decks[1].length > 0 ? (
 					decks[1].map((beer) => (
-						<article
+						<BeerCard
 							key={`computer ${beer.sku}-${Math.random()}`}
-							className="temp-card"
-						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
+							beer={beer}
+						/>
 					))
 				) : (
 					<></>
@@ -149,37 +147,24 @@ function GameSet() {
 			<section id="game-area">
 				<div id="computer-selected-card">
 					{computerCard ? (
-						<div>
-							<p>{computerCard.name}</p>
-							<p>ABV: {computerCard.abv}</p>
-						</div>
+						<BeerCard beer={computerCard} />
 					) : (
 						<p>en attente de ta card</p>
 					)}
 				</div>
 				<div id="user-selected-card">
-					{userCard ? (
-						<div>
-							<p>{userCard.name}</p>
-							<p>ABV: {userCard.abv}</p>
-						</div>
-					) : (
-						<p>Choisi une card</p>
-					)}
+					{userCard ? <BeerCard beer={userCard} /> : <p>Choisi une card</p>}
 				</div>
 			</section>
 			<section className="deck" id="user-deck">
 				{decks[0].length > 0 ? (
 					decks[0].map((beer) => (
 						// biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
-						<article
+						<BeerCard
 							key={`player-${beer.sku}-${Math.random()}`}
-							className="temp-card"
-							onClick={() => handleUserCardSelect(beer)}
-						>
-							<p>{beer.name}</p>
-							<p>{beer.abv}</p>
-						</article>
+							beer={beer}
+							handleUserCardSelect={handleUserCardSelect}
+						/>
 					))
 				) : (
 					<></>

@@ -1,0 +1,89 @@
+.beer-card {
+	width: 12%;
+	height: 125px;
+	background-color: var(--light-color);
+	border-radius: 20px;
+	border: 10px solid var(--dark-color);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+	position: relative;
+}
+
+.beer-card::before {
+	content: "";
+	background-image: url("../assets/beer_480.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	transform: rotate(-30deg);
+	position: absolute;
+	top: 35%;
+	left: 25%;
+	width: 50%;
+	height: 50%;
+}
+
+.container-name {
+	background-color: var(--dark-color);
+	padding: 8px;
+	text-align: center;
+	z-index: 1;
+}
+
+.container-name h2 {
+	font-family: "Calligraffitti", "sans cerif";
+
+	font-size: 12px;
+	color: rgba(206, 200, 200, 0.966);
+	margin-bottom: 5px;
+}
+
+.container-number {
+	background-color: var(--dark-color);
+	padding: 5px;
+	border-radius: 50%;
+	align-self: flex-end;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: -15px;
+	right: -15px;
+}
+
+.container-number h3 {
+	font-size: 18px;
+	color: white;
+}
+
+.container-I-card {
+	width: 20px;
+	height: 20px;
+	border: solid var(--dark-color) 5px;
+	background-color: var(--dark-color);
+	border-radius: 50%;
+}
+
+.container-I-card h3 {
+	font-family: "Calligraffitti", "sans cerif";
+	font-size: 17px;
+	color: rgba(206, 200, 200, 0.966);
+}
+#game-area {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+}
+
+#computer-selected-card .beer-card,
+#user-selected-card .beer-card {
+	width: 155px;
+	height: 75%;
+	box-sizing: border-box;
+	margin-top: 2rem;
+}
