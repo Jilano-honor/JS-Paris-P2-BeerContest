@@ -1,6 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Domine:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap");
 
 :root {
 	--main-color: #e8871e;
@@ -9,13 +8,17 @@
 	--second-color: #d4d4aa;
 }
 
+* {
+	box-sizing: border-box;
+}
+
 /* Initialisation des fonts. A modifier les tailles de police au besoin */
 
 h1 {
-	font-family: "PT Sans Narrow", sans-serif;
-	font-size: 2rem;
+	font-size: 3.5rem;
 }
 
+h1,
 h2,
 h3 {
 	font-family: "Marck Script", sans-serif;
@@ -31,11 +34,12 @@ h3 {
 
 p,
 a {
-	font-family: "Domine", serif;
+	font-family: "Hind Vadodara", sans-serif;
 }
 
 button {
 	font-size: 1.5rem;
+	font-family: "Marck Script", sans-serif;
 }
 
 a {

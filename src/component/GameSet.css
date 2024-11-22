@@ -1,3 +1,9 @@
+button#button-reload {
+	position: absolute;
+	top: 1rem;
+	right: 2rem;
+}
+
 section.deck {
 	display: flex;
 	justify-content: space-evenly;
@@ -5,29 +11,6 @@ section.deck {
 	width: 100%;
 
 	margin: 2.5rem;
-}
-
-button#reload-decks {
-	background-color: black;
-	border: none;
-	border-radius: 5px;
-	opacity: 60%;
-
-	font-size: 0.8rem;
-	text-decoration: none;
-	color: white;
-
-	position: absolute;
-	top: 1rem;
-	right: 2rem;
-
-	padding: 0.4rem 1.4rem;
-
-	cursor: pointer;
-}
-
-button#reload-decks:hover {
-	opacity: 1;
 }
 
 section.deck article.temp-card {
@@ -44,4 +27,36 @@ section#game-area {
 
 	width: 500px;
 	height: 300px;
+}
+
+section#game-area h3#pick-card {
+	position: absolute;
+	top: 45%;
+	left: 40%;
+
+	font-size: 2rem;
+	text-align: center;
+	color: white;
+	line-height: 2;
+}
+
+.button-user-cards {
+	font: inherit;
+	border: none;
+	padding: 0;
+}
+
+div#round-msg {
+	position: absolute;
+	top: 15rem;
+	right: 0;
+	margin: 0 auto;
+
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 200px;
+	padding: 2rem;
+}
+
+div#round-msg h3 {
+	color: white;
 }
