@@ -106,13 +106,14 @@
 
 	#nav-mobile a img.nav-img {
 		width: 40px;
+		filter: invert(0.8);
 	}
 
 	#nav-mobile a p {
 		font-family: "Marck Script", sans-serif;
 		font-size: 1.5rem;
 		font-weight: 600;
-		color: var(--light-color);
+		color: #cccccc;
 
 		text-wrap: nowrap;
 	}
