@@ -4,8 +4,8 @@ import "./GameSet.css";
 
 import { useUserStats } from "../context/UserStats";
 
-import type UserStatsType from "../interface/UserStatsType";
 import type BeerType from "../interface/BeerType";
+import type UserStatsType from "../interface/UserStatsType";
 
 interface GameSetProps {
 	gameStates: { start: number; ingame: number; end: number };

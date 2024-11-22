@@ -10,6 +10,7 @@
 	flex-direction: row-reverse;
 	height: 359px;
 }
+
 #header-home h1 {
 	margin-bottom: 50px;
 	flex-grow: 1;
@@ -47,4 +48,37 @@
 	position: absolute;
 	left: 10%;
 	bottom: 2%;
+}
+
+.character-image-mobile {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	#main-home {
+		min-height: 85vh;
+		height: max-content;
+	}
+
+	#header-home {
+		height: auto;
+	}
+
+	.entrance-game {
+		position: static;
+		height: auto;
+		width: 100%;
+		top: 0;
+		right: 0;
+	}
+
+	.character-image {
+		display: none;
+	}
+
+	.character-image-mobile {
+		display: inline-block;
+		position: static;
+		width: 200px;
+	}
 }

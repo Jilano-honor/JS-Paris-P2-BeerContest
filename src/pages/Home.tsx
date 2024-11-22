@@ -4,15 +4,14 @@ import "./Home.css";
 function Home() {
 	return (
 		<main id="main-home">
-			<img
-				src="src\assets\barman.png"
-				alt="Le barman"
-				className="character-image"
-			/>
-
 			<header id="header-home">
 				<div className="entrance-game">
 					<h1>Bienvenue sur notre Beer Contest</h1>
+					<img
+						src="src\assets\barman.png"
+						alt="Le barman"
+						className="character-image-mobile"
+					/>
 					<p className="header-txt">
 						L’abus d’alcool est dangereux pour la santé, buvez avec modération.
 					</p>
@@ -25,6 +24,11 @@ function Home() {
 					<HomeButtons />
 				</div>
 			</header>
+			<img
+				src="src\assets\barman.png"
+				alt="Le barman"
+				className="character-image"
+			/>
 		</main>
 	);
 }

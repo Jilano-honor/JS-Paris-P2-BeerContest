@@ -20,10 +20,6 @@ function Game() {
 				? "gameHighAlcohol"
 				: "gameMiddleAlcohol";
 
-	const showStats = () => {
-		setStatsDisplayed(!statsDisplayed);
-	};
-
 	const { userStats } = useUserStats();
 
 	return (
@@ -44,7 +40,9 @@ function Game() {
 						type="button"
 						className="game-buttons"
 						id="button-stats"
-						onClick={showStats}
+						onClick={() => {
+							setStatsDisplayed(!statsDisplayed);
+						}}
 					>
 						{statsDisplayed
 							? "Masquer mes statistiques"
