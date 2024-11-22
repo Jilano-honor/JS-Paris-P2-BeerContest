@@ -90,3 +90,10 @@
 #home-buttons .home-button:hover p {
 	color: var(--dark-color);
 }
+
+@media screen and (max-width: 768px) {
+	#home-buttons {
+		flex-direction: column;
+		gap: 0;
+	}
+}
