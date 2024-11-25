@@ -41,7 +41,6 @@
 }
 
 .container-number {
-	background-color: var(--dark-color);
 	padding: 5px;
 	border-radius: 50%;
 	align-self: flex-end;
@@ -54,6 +53,16 @@
 	position: absolute;
 	bottom: -15px;
 	right: -15px;
+}
+
+.second-color {
+	background-color: var(--second-color);
+}
+.light-color {
+	background-color: var(--light-color);
+}
+.dark-color {
+	background-color: var(--dark-color);
 }
 
 .container-number h3 {
