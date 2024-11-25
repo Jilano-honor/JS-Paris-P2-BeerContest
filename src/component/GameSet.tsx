@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
+import imagealcohollevel from "../assets/Beer-game-AlcoholLeve.png";
 
 import "./GameSet.css";
+import BeerCard from "./BeerCard";
 
 import { useUserStats } from "../context/UserStats";
 
-import imagealcohollevel from "../assets/Beer-game-AlcoholLeve.png";
 import type BeerType from "../interface/BeerType";
 import type UserStatsType from "../interface/UserStatsType";
 
@@ -230,13 +231,10 @@ function GameSet({
 						}
 
 						return (
-							<article
-								key={`player ${beer.sku} ${Math.random()}`}
-								className={`temp-card ${drunkEffectClass}`}
-							>
-								<p>{beer.name}</p>
-								<p>{beer.abv}%</p>
-							</article>
+							<BeerCard
+								key={`computer ${beer.sku}-${Math.random()}`}
+								beer={beer}
+							/>
 						);
 					})
 				) : (
@@ -246,21 +244,12 @@ function GameSet({
 
 			<section id="game-area">
 				<div id="computer-selected-card">
-					{computerCard ? (
-						<div>
-							<p>{computerCard.name}</p>
-							<p>ABV: {computerCard.abv}</p>
-						</div>
-					) : (
-						<></>
-					)}
+					{computerCard ? <BeerCard beer={computerCard} /> : <></>}
 				</div>
 				<div id="user-selected-card">
+					export default GameSet; export default GameSet;
 					{userCard ? (
-						<div>
-							<p>{userCard.name}</p>
-							<p>ABV: {userCard.abv}</p>
-						</div>
+						<BeerCard beer={userCard} />
 					) : (
 						<h3 id="pick-card">
 							Choisis une carte <br />v
@@ -272,7 +261,6 @@ function GameSet({
 				{decks.user.length > 0 ? (
 					decks.user.map((beer) => {
 						let drunkEffectClass = "";
-
 						if (alcoholLevel >= 5 && alcoholLevel < 10) {
 							drunkEffectClass = "drunk-light";
 						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
@@ -298,10 +286,11 @@ function GameSet({
 									}
 								}}
 							>
-								<article className={`temp-card ${drunkEffectClass}`}>
-									<p>{beer.name}</p>
-									<p>{beer.abv}</p>
-								</article>
+								<BeerCard
+									key={`player-${beer.sku}-${Math.random()}`}
+									beer={beer}
+									handleUserCardSelect={handleUserCardSelect}
+								/>
 							</button>
 						);
 					})
