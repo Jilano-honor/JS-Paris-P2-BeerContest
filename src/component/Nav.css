@@ -1,10 +1,11 @@
 #navigation-bar {
 	background-color: var(--light-color);
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	height: 10vh;
 	position: relative;
+	padding-left: 8rem;
 }
 
 #navigation-bar a#logo-button {
@@ -15,6 +16,13 @@
 	height: 100%;
 	width: auto;
 	mix-blend-mode: multiply;
+}
+
+#navigation-bar section#nav-links {
+	width: 50vw;
+
+	display: flex;
+	justify-content: space-evenly;
 }
 
 #navigation-bar a {

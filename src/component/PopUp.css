@@ -12,6 +12,7 @@ main#game-main section#pop-up {
 
 	background-color: var(--light-color);
 	border-radius: 15px;
+	box-shadow: 5px 5px 20px 10px rgba(0, 0, 0, 0.712);
 }
 
 main#game-main section#pop-up img {
