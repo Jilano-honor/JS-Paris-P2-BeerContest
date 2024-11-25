@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import imagealcohollevel from "../assets/Beer-game-AlcoholLeve.png";
+import imageAlcoholLevel from "../assets/Beer-game-AlcoholLeve.png";
 
 import "./GameSet.css";
 import BeerCard from "./BeerCard";
@@ -194,7 +194,7 @@ function GameSet({
 		<>
 			<section id="game-alcohol-level">
 				<img
-					src={imagealcohollevel}
+					src={imageAlcoholLevel}
 					alt="imagealcohollevel"
 					id="imagealcohollevel"
 				/>
