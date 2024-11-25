@@ -247,7 +247,6 @@ function GameSet({
 					{computerCard ? <BeerCard beer={computerCard} /> : <></>}
 				</div>
 				<div id="user-selected-card">
-					export default GameSet; export default GameSet;
 					{userCard ? (
 						<BeerCard beer={userCard} />
 					) : (
