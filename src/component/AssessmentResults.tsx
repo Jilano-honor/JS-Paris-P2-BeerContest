@@ -17,7 +17,7 @@ function AssessmentResult({
 }: { setCurrentAssessmentStep: React.Dispatch<React.SetStateAction<number>> }) {
 	const { userAssessmentScore, BEER_CATEGORIES } = useUserStats();
 
-	const maxValue = Math.max(Math.max(...Object.values(userAssessmentScore)));
+	const maxValue = Math.max(...Object.values(userAssessmentScore));
 	const userMaxKey = Object.keys(userAssessmentScore).find(
 		(key) =>
 			userAssessmentScore[key as keyof typeof userAssessmentScore] === maxValue,
