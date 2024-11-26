@@ -1,0 +1,107 @@
+@keyframes shuffle {
+	0% {
+		rotate: 0deg;
+	}
+	10% {
+		rotate: 25deg;
+	}
+	20% {
+		rotate: 0deg;
+	}
+	30% {
+		rotate: -25deg;
+	}
+	40% {
+		rotate: 0deg;
+	}
+	50% {
+		rotate: 25deg;
+	}
+	60% {
+		rotate: 0deg;
+	}
+	70% {
+		rotate: -25deg;
+	}
+	80% {
+		rotate: 0deg;
+	}
+	90% {
+		rotate: 0deg;
+	}
+	100% {
+		rotate: 0deg;
+	}
+}
+
+#assessment-result-buttons {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+#assessment-result-buttons button {
+	cursor: pointer;
+}
+
+#assessment-result-buttons #assessment-to-game-button {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding: 2rem 3rem;
+	gap: 20px;
+
+	background: linear-gradient(
+		to bottom left,
+		var(--light-color),
+		var(--main-color)
+	);
+	border-radius: 50px;
+	border: inset 10px var(--dark-color);
+
+	width: 280px;
+	height: 90px;
+}
+
+#assessment-result-buttons #assessment-to-game-button p {
+	color: white;
+	font-family: "Marck Script", sans-serif;
+	font-size: 2rem;
+}
+
+#assessment-result-buttons #assessment-to-game-button img {
+	width: 50px;
+	height: auto;
+	object-fit: contain;
+	border-radius: 90%;
+}
+
+#assessment-result-buttons #assessment-to-game-button:hover img {
+	animation-name: shuffle;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+}
+
+#assessment-result-buttons #assessment-to-game-button:hover p {
+	color: var(--dark-color);
+}
+
+#assessment-result-buttons #redo-assessment-button {
+	background-color: transparent;
+	color: #ffffffbe;
+	border: solid #ffffffbe 2px;
+	border-radius: 50px;
+
+	padding: 1rem 2rem;
+
+	width: 260px;
+	height: 70px;
+
+	font-size: 1.2rem;
+}
+
+#assessment-result-buttons #redo-assessment-button:hover {
+	background-color: var(--main-color);
+	color: var(--dark-color);
+	border: none;
+}
