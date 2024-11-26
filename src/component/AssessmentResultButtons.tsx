@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "./AssessmentResultButtons.css";
 
 import logoBeer from "../assets/picto-beer.png";
@@ -21,10 +23,10 @@ function AssessmentResultButtons({
 
 	return (
 		<section id="assessment-result-buttons">
-			<button id="assessment-to-game-button" type="button">
+			<Link to="/game" id="assessment-to-game-button">
 				<p>Jouer</p>
 				<img src={logoBeer} id="logo-beer" alt="bières" />
-			</button>
+			</Link>
 			<button
 				id="redo-assessment-button"
 				type="button"

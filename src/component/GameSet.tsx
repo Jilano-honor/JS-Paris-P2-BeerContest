@@ -6,6 +6,7 @@ import BeerCard from "./BeerCard";
 
 import { useUserStats } from "../context/UserStats";
 
+import { useFilteredAPI } from "../context/FilteredAPI";
 import type BeerType from "../interface/BeerType";
 import type UserStatsType from "../interface/UserStatsType";
 
@@ -26,7 +27,10 @@ function GameSet({
 	alcoholLevel,
 	alcoholLevelCategory,
 }: GameSetProps) {
-	const [beers, setBeers] = useState([]);
+	const { userAssessmentScore } = useUserStats();
+	const { getFilteredBeers, beersFiltered } = useFilteredAPI();
+
+	const [beers, setBeers] = useState<BeerType[] | []>([]);
 	const [decks, setDecks] = useState<{
 		user: BeerType[];
 		computer: BeerType[];
@@ -71,11 +75,28 @@ function GameSet({
 		[level],
 	);
 
+	const [boostOn, setBoostOn] = useState<boolean>(false);
+	useEffect(() => {
+		if (!Object.values(userAssessmentScore).every((value) => value === 0)) {
+			setBoostOn(true);
+		}
+	}, [userAssessmentScore]);
+
 	// Initializing the game
 
 	useEffect(() => {
-		getBeers();
-	}, [getBeers]);
+		if (Object.values(userAssessmentScore).every((value) => value === 0)) {
+			getBeers();
+		} else {
+			getFilteredBeers();
+		}
+	}, [userAssessmentScore, getBeers, getFilteredBeers]);
+
+	useEffect(() => {
+		if (beersFiltered.length > 0) {
+			setBeers(beersFiltered);
+		}
+	}, [beersFiltered]);
 
 	useEffect(() => {
 		if (beers.length > 0 && currentGameState === gameStates.ingame) {
@@ -128,7 +149,7 @@ function GameSet({
 			}));
 		}
 	}, [alcoholLevel]);
-	const shuffleDeck = (deck: BeerProps[]) => {
+	const shuffleDeck = (deck: BeerType[]) => {
 		const shuffledDeck = [...deck];
 		for (let i = shuffledDeck.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
@@ -165,7 +186,9 @@ function GameSet({
 			computerSelectedCard,
 			ROUND_WINNER,
 		);
-		updateAlcoholLevel(roundResult.winner, selectedCard);
+		boostOn
+			? setBoostOn(false)
+			: updateAlcoholLevel(roundResult.winner, selectedCard);
 		setRoundMsg(roundResult.message);
 
 		if (newUserDeck.length === 0) {
@@ -199,11 +222,19 @@ function GameSet({
 					id="imagealcohollevel"
 				/>
 				<div id="progresse-bar">
-					<div
-						id="verticale-bar"
-						style={{ height: `${alcoholLevel} ` * 4.5 }}
-					/>
+					<div id="verticale-bar" style={{ height: alcoholLevel * 4.5 }} />
 					<div id="progresse-alcohol-level">{alcoholLevel}%</div>
+				</div>
+				<div id="boost">
+					<img
+						src="/src/assets/boost.png"
+						alt="boost"
+						className={boostOn ? "" : "boost-off"}
+						width="30px"
+					/>
+					<p id="boost-description">
+						Fais le test et découvre ton type de bière pour gagner un boost
+					</p>
 				</div>
 			</section>
 			<button

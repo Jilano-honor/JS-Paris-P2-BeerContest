@@ -5,6 +5,7 @@ import "./App.css";
 import Footer from "./component/Footer";
 import Navigation from "./component/Nav";
 
+import { FilteredAPIProvider } from "./context/FilteredAPI";
 import { UserStatsProvider } from "./context/UserStats";
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
 		<>
 			<Navigation />
 			<UserStatsProvider>
-				<Outlet />
+				<FilteredAPIProvider>
+					<Outlet />
+				</FilteredAPIProvider>
 			</UserStatsProvider>
 			<Footer />
 		</>

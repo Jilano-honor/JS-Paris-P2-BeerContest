@@ -15,11 +15,12 @@ main#game-main section#pop-up {
 	box-shadow: 5px 5px 20px 10px rgba(0, 0, 0, 0.712);
 }
 
-main#game-main section#pop-up img {
+main#game-main section#pop-up img#barman {
 	width: 25%;
+	height: auto;
 }
 
-main#game-main section#pop-up div {
+main#game-main section#pop-up div.pop-up-txt {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
@@ -40,4 +41,15 @@ main#game-main section#pop-up div button {
 
 main#game-main section#pop-up div button:hover {
 	color: white;
+}
+
+.filtered-decks {
+	margin: 1rem 0;
+	font-weight: 600;
+}
+
+#boost-desc {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }

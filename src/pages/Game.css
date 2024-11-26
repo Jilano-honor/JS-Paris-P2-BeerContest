@@ -37,29 +37,6 @@ button.game-buttons:hover {
 	opacity: 1;
 }
 
-main#game-main div#game-stats article {
-	display: grid;
-	grid-template: repeat(6, 1fr) / auto 1fr;
-	column-gap: 3rem;
-	row-gap: 0.5rem;
-
-	width: 100%;
-	background-color: black;
-	opacity: 60%;
-	color: white;
-
-	padding: 2rem;
-}
-
-main#game-main div#game-stats article #header-nb-games {
-	grid-column-end: span 2;
-	font-style: italic;
-}
-
-.stats-taux {
-	text-indent: 2rem;
-}
-
 main#game-main section#game-gameset {
 	grid-area: 1 / 2 / 3 / 2;
 
