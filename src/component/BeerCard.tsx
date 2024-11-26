@@ -27,11 +27,16 @@ interface BeerCardProps {
 
 const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 	const abvNumber = Number.parseFloat(beer.abv.replace("%", ""));
-	const getColorByAlcoholLevel = (abvNumber: number) => {
-		if (abvNumber < 4.99) return "var(--second-color)";
-		if (abvNumber >= 5 && abvNumber < 7.99) return "var(--light-color)";
-		return "var(--dark-color)";
-	};
+	let getColorByAlcoholLevelClass = "";
+	if (abvNumber < 4.99) {
+		getColorByAlcoholLevelClass = "second-color";
+	}
+	if (abvNumber >= 5 && abvNumber < 8) {
+		getColorByAlcoholLevelClass = "light-color";
+	}
+	if (abvNumber >= 7.99) {
+		getColorByAlcoholLevelClass = "dark-color";
+	}
 
 	return (
 		<div
@@ -47,10 +52,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 				<h2>{beer.name}</h2>
 			</div>
 
-			<div
-				className="container-number"
-				style={{ backgroundColor: getColorByAlcoholLevel(abvNumber) }}
-			>
+			<div className={`container-number ${getColorByAlcoholLevelClass}`}>
 				<h3>{beer.abv}</h3>
 			</div>
 			<div className="container-I-card">

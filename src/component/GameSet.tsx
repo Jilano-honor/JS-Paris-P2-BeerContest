@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import imageAlcoholLevel from "../assets/Beer-game-AlcoholLeve.png";
 
 import "./GameSet.css";
 import BeerCard from "./BeerCard";
@@ -119,15 +120,42 @@ function GameSet({
 			setAlcoholLevel((prev) => prev + userAbv);
 		}
 	};
-
+	useEffect(() => {
+		if (alcoholLevel >= 15) {
+			setDecks((prevDecks) => ({
+				user: shuffleDeck(prevDecks.user),
+				computer: shuffleDeck(prevDecks.computer),
+			}));
+		}
+	}, [alcoholLevel]);
+	const shuffleDeck = (deck: BeerProps[]) => {
+		const shuffledDeck = [...deck];
+		for (let i = shuffledDeck.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[shuffledDeck[i], shuffledDeck[j]] = [shuffledDeck[j], shuffledDeck[i]];
+		}
+		return shuffledDeck;
+	};
 	const handleUserCardSelect = (selectedCard: BeerType) => {
 		const computerSelectedCard =
 			decks.computer[Math.floor(Math.random() * decks.computer.length)];
 
-		decks.user = decks.user.filter((beer) => beer.sku !== selectedCard.sku);
-		decks.computer = decks.computer.filter(
-			(beer) => beer.sku !== computerSelectedCard.sku,
+		const userCardIndex = decks.user.findIndex(
+			(beer) => beer.sku === selectedCard.sku,
 		);
+		const newUserDeck = [
+			...decks.user.slice(0, userCardIndex),
+			...decks.user.slice(userCardIndex + 1),
+		];
+		const computerCardIndex = decks.computer.findIndex(
+			(beer) => beer.sku === computerSelectedCard.sku,
+		);
+		const newComputerDeck = [
+			...decks.computer.slice(0, computerCardIndex),
+			...decks.computer.slice(computerCardIndex + 1),
+		];
+
+		setDecks({ user: newUserDeck, computer: newComputerDeck });
 
 		setUserCard(selectedCard);
 		setComputerCard(computerSelectedCard);
@@ -139,7 +167,8 @@ function GameSet({
 		);
 		updateAlcoholLevel(roundResult.winner, selectedCard);
 		setRoundMsg(roundResult.message);
-		if (decks.user.length === 0) {
+
+		if (newUserDeck.length === 0) {
 			endGame();
 		}
 	};
@@ -151,6 +180,7 @@ function GameSet({
 	const endGame = () => {
 		setCurrentGameState(gameStates.end);
 		setRoundMsg(null);
+		setAlcoholLevel(0);
 
 		setUserStats((prevStats: UserStatsType) => ({
 			...prevStats,
@@ -162,6 +192,20 @@ function GameSet({
 
 	return (
 		<>
+			<section id="game-alcohol-level">
+				<img
+					src={imageAlcoholLevel}
+					alt="imagealcohollevel"
+					id="imagealcohollevel"
+				/>
+				<div id="progresse-bar">
+					<div
+						id="verticale-bar"
+						style={{ height: `${alcoholLevel} ` * 4.5 }}
+					/>
+					<div id="progresse-alcohol-level">{alcoholLevel}%</div>
+				</div>
+			</section>
 			<button
 				type="button"
 				className="game-buttons"
@@ -172,22 +216,37 @@ function GameSet({
 			</button>
 			<section className="deck" id="computer-deck">
 				{decks.computer.length > 0 ? (
-					decks.computer.map((beer) => (
-						<BeerCard
-							key={`computer ${beer.sku}-${Math.random()}`}
-							beer={beer}
-						/>
-					))
+					decks.computer.map((beer) => {
+						let drunkEffectClass = "";
+						if (alcoholLevel >= 5 && alcoholLevel < 10) {
+							drunkEffectClass = "drunk-light";
+						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
+							drunkEffectClass = "drunk-medium";
+						} else if (alcoholLevel >= 15 && alcoholLevel < 20) {
+							drunkEffectClass = "drunk-high";
+						} else if (alcoholLevel >= 20 && alcoholLevel < 25) {
+							drunkEffectClass = "drunk-very-high";
+						} else if (alcoholLevel >= 25) {
+							drunkEffectClass = "drunk-extreme";
+						}
+
+						return (
+							<BeerCard
+								key={`computer ${beer.sku}-${Math.random()}`}
+								beer={beer}
+							/>
+						);
+					})
 				) : (
 					<></>
 				)}
 			</section>
+
 			<section id="game-area">
 				<div id="computer-selected-card">
 					{computerCard ? <BeerCard beer={computerCard} /> : <></>}
 				</div>
 				<div id="user-selected-card">
-					export default GameSet; export default GameSet;
 					{userCard ? (
 						<BeerCard beer={userCard} />
 					) : (
@@ -199,13 +258,41 @@ function GameSet({
 			</section>
 			<section className="deck" id="user-deck">
 				{decks.user.length > 0 ? (
-					decks.user.map((beer) => (
-						<BeerCard
-							key={`player-${beer.sku}-${Math.random()}`}
-							beer={beer}
-							handleUserCardSelect={handleUserCardSelect}
-						/>
-					))
+					decks.user.map((beer) => {
+						let drunkEffectClass = "";
+						if (alcoholLevel >= 5 && alcoholLevel < 10) {
+							drunkEffectClass = "drunk-light";
+						} else if (alcoholLevel >= 10 && alcoholLevel < 15) {
+							drunkEffectClass = "drunk-medium";
+						} else if (alcoholLevel >= 15 && alcoholLevel < 20) {
+							drunkEffectClass = "drunk-high";
+						} else if (alcoholLevel >= 20 && alcoholLevel < 25) {
+							drunkEffectClass = "drunk-very-high";
+						} else if (alcoholLevel >= 25) {
+							drunkEffectClass = "drunk-extreme";
+						}
+
+						return (
+							<button
+								type="button"
+								className="button-user-cards"
+								key={`player ${beer.sku} ${Math.random()}`}
+								onClick={() => handleUserCardSelect(beer)}
+								tabIndex={0}
+								onKeyDown={(event) => {
+									if (event.key === " ") {
+										handleUserCardSelect(beer);
+									}
+								}}
+							>
+								<BeerCard
+									key={`player-${beer.sku}-${Math.random()}`}
+									beer={beer}
+									handleUserCardSelect={handleUserCardSelect}
+								/>
+							</button>
+						);
+					})
 				) : (
 					<></>
 				)}
