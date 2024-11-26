@@ -1,10 +1,23 @@
 import { createContext, useContext, useState } from "react";
 import type { ReactNode } from "react";
+
+import type UserAssessmentScoreType from "../interface/UserAssessmentScoreType";
 import type UserStatsType from "../interface/UserStatsType";
 
 interface UserStatsContextType {
 	userStats: UserStatsType;
 	setUserStats: React.Dispatch<React.SetStateAction<UserStatsType>>;
+	userAssessmentScore: UserAssessmentScoreType;
+	setUserAssessmentScore: React.Dispatch<
+		React.SetStateAction<UserAssessmentScoreType>
+	>;
+	BEER_CATEGORIES: {
+		golden: string;
+		belgian: string;
+		ale: string;
+		ipa: string;
+		hazy: string;
+	};
 }
 
 const UserStats = createContext<UserStatsContextType | null>(null);
@@ -18,8 +31,33 @@ export function UserStatsProvider({ children }: { children: ReactNode }) {
 		gameHighAlcohol: 0,
 	});
 
+	const [userAssessmentScore, setUserAssessmentScore] =
+		useState<UserAssessmentScoreType>({
+			golden: 0,
+			belgian: 0,
+			ale: 0,
+			ipa: 0,
+			hazy: 0,
+		});
+
+	const BEER_CATEGORIES = {
+		golden: "blonde légère",
+		belgian: "blonde belge",
+		ale: "bière anglaise",
+		ipa: "IPA",
+		hazy: "IPA de caractère",
+	};
+
 	return (
-		<UserStats.Provider value={{ userStats, setUserStats }}>
+		<UserStats.Provider
+			value={{
+				userStats,
+				setUserStats,
+				userAssessmentScore,
+				setUserAssessmentScore,
+				BEER_CATEGORIES,
+			}}
+		>
 			{children}
 		</UserStats.Provider>
 	);

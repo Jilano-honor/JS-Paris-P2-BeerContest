@@ -60,3 +60,238 @@ div#round-msg {
 div#round-msg h3 {
 	color: white;
 }
+
+section#game-alcohol-level {
+	position: absolute;
+	right: 75%;
+	top: 35%;
+}
+img#imagealcohollevel {
+	height: 250px;
+}
+div#progresse-bar {
+	position: absolute;
+	bottom: 60px;
+	right: 85px;
+}
+#verticale-bar {
+	width: 90px;
+	background-color: rgb(255, 217, 0);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	opacity: 0.75;
+	transition: all 1.5s linear;
+}
+#progresse-alcohol-level {
+	display: inline-block;
+	font-size: x-large;
+	position: relative;
+	left: -80px;
+	top: -60px;
+}
+.drunk-light {
+	animation: drunkLight 2.5s ease-in-out infinite;
+	filter: blur(1px);
+}
+
+.drunk-medium {
+	animation: drunkMedium 2s ease-in-out infinite;
+	filter: blur(1.25px);
+}
+
+.drunk-high {
+	animation: drunkHigh 1.5s ease-in-out infinite;
+	filter: blur(1.5px);
+}
+
+.drunk-very-high {
+	animation: drunkVeryHigh 1s ease-in-out infinite;
+	filter: blur(1.75px);
+}
+
+.drunk-extreme {
+	animation: drunkExtreme 0.5s ease-in-out infinite;
+	filter: blur(2px);
+}
+
+@keyframes drunkLight {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkMedium {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkHigh {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkVeryHigh {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkExtreme {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}

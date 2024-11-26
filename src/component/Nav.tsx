@@ -25,22 +25,24 @@ function Navigation() {
 				<Link to="/" onClick={() => setNavDisplayed(false)} id="logo-button">
 					<img src={logo} alt="Logo" id="logo" />
 				</Link>
-				<Link to="/" className="nav-link">
-					<img src={home} alt="Accueil" className="nav-img" />
-					<p>Accueil</p>
-				</Link>
-				<Link to="/game" className="nav-link">
-					<img src={play} alt="Jouer" className="nav-img" />
-					<p>Jouer</p>
-				</Link>
-				<Link to="/test" className="nav-link">
-					<img src={question} alt="Test" className="nav-img" />
-					<p>Test</p>
-				</Link>
-				<Link to="/about" className="nav-link">
-					<img src={information} alt="A propos" className="nav-img" />
-					<p>A propos</p>
-				</Link>
+				<section id="nav-links">
+					<Link to="/" className="nav-link">
+						<img src={home} alt="Accueil" className="nav-img" />
+						<p>Accueil</p>
+					</Link>
+					<Link to="/game" className="nav-link">
+						<img src={play} alt="Jouer" className="nav-img" />
+						<p>Jouer</p>
+					</Link>
+					<Link to="/test" className="nav-link">
+						<img src={question} alt="Test" className="nav-img" />
+						<p>Test</p>
+					</Link>
+					<Link to="/about" className="nav-link">
+						<img src={information} alt="A propos" className="nav-img" />
+						<p>A propos</p>
+					</Link>
+				</section>
 				<img
 					src={navDisplayed ? close : burger}
 					alt={

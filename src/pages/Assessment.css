@@ -4,3 +4,64 @@
 	background-image: url("/src/assets/accueil_720.jpg");
 	position: relative;
 }
+
+#assessment-header {
+	display: flex;
+	height: 359px;
+}
+
+#assessment-header h1,
+#assessment-header p {
+	color: ivory;
+}
+
+#assessment-header p.header-txt {
+	font-size: 1.1rem;
+}
+
+.assessment-content {
+	background-color: rgba(0, 0, 0, 0.6);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2rem;
+
+	width: 905px;
+	min-height: 399px;
+	margin: 0 auto;
+	padding: 50px;
+
+	border-radius: 2rem;
+	position: absolute;
+	top: 10%;
+	right: 5%;
+
+	color: ivory;
+}
+
+.assessment-answers {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	gap: 1rem;
+}
+
+#assessment-intro {
+	align-items: center;
+}
+
+.assessment-answers button {
+	background-color: var(--dark-color);
+
+	border: none;
+	border-radius: 50px;
+	box-shadow: 5px 5px 5px 5px black;
+	padding: .5rem;
+
+	font-family: "Hind Vadodara", sans-serif;
+	font-size: 1rem;
+	color: ivory;
+
+	cursor: pointer;
+}

@@ -1,0 +1,38 @@
+header.assessment-content {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+header.assessment-content #assessment-results-lists {
+	display: flex;
+	justify-content: space-between;
+}
+
+header.assessment-content #assessment-results-lists div {
+	flex-grow: 1;
+}
+
+@counter-style beer {
+	system: cyclic;
+	symbols: "\01F37B";
+	suffix: " ";
+}
+
+@counter-style circled-numbers {
+	system: cyclic;
+	symbols: "\002780" "\002781" "\002782" "\002783" "\002784";
+	suffix: " ";
+}
+
+header.assessment-content #assessment-results-lists div ul {
+	margin-left: 2rem;
+}
+
+header.assessment-content #assessment-results-lists div ul li {
+	list-style: circled-numbers outside;
+	text-indent: 1rem;
+	line-height: 1.2;
+}
+
+header.assessment-content #assessment-results-lists div#beers-exemple ul li {
+	list-style: beer outside;
+}
