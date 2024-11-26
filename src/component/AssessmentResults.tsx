@@ -15,13 +15,13 @@ interface filterBeersPerTypeProps {
 function AssessmentResult({
 	setCurrentAssessmentStep,
 }: { setCurrentAssessmentStep: React.Dispatch<React.SetStateAction<number>> }) {
-	const { userAssessmentScore, BEER_TYPES } = useUserStats();
+	const { userAssessmentScore, BEER_CATEGORIES } = useUserStats();
 
 	const maxValue = Math.max(Math.max(...Object.values(userAssessmentScore)));
 	const userMaxKey = Object.keys(userAssessmentScore).find(
 		(key) =>
 			userAssessmentScore[key as keyof typeof userAssessmentScore] === maxValue,
-	) as keyof typeof BEER_TYPES;
+	) as keyof typeof BEER_CATEGORIES;
 
 	const sortedType = Object.entries(userAssessmentScore).sort(
 		([, A], [, B]) => B - A,
@@ -91,9 +91,9 @@ function AssessmentResult({
 
 	return (
 		<header className="assessment-content">
-			<h1>Bravo ! Tu es plutôt {BEER_TYPES[userMaxKey]}</h1>
+			<h1>Bravo ! Tu es plutôt {BEER_CATEGORIES[userMaxKey]}</h1>
 			<p>
-				Tu es plutôt {BEER_TYPES[userMaxKey]} à {maxValue * 10}%.
+				Tu es plutôt {BEER_CATEGORIES[userMaxKey]} à {maxValue * 10}%.
 			</p>
 			<p className="header-txt">
 				{assessmentResults[userMaxKey].beerDescription}
@@ -121,12 +121,14 @@ function AssessmentResult({
 					<ul>
 						{sortedType.map((resultPerType) => (
 							<li key={resultPerType[0]}>
-								{BEER_TYPES[resultPerType[0] as keyof typeof BEER_TYPES]
+								{BEER_CATEGORIES[
+									resultPerType[0] as keyof typeof BEER_CATEGORIES
+								]
 									.charAt(0)
 									.toUpperCase() +
-									BEER_TYPES[resultPerType[0] as keyof typeof BEER_TYPES].slice(
-										1,
-									)}
+									BEER_CATEGORIES[
+										resultPerType[0] as keyof typeof BEER_CATEGORIES
+									].slice(1)}
 								: {resultPerType[1] * 10}%
 							</li>
 						))}

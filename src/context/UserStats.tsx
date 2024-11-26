@@ -11,7 +11,7 @@ interface UserStatsContextType {
 	setUserAssessmentScore: React.Dispatch<
 		React.SetStateAction<UserAssessmentScoreType>
 	>;
-	BEER_TYPES: {
+	BEER_CATEGORIES: {
 		golden: string;
 		belgian: string;
 		ale: string;
@@ -40,7 +40,7 @@ export function UserStatsProvider({ children }: { children: ReactNode }) {
 			hazy: 0,
 		});
 
-	const BEER_TYPES = {
+	const BEER_CATEGORIES = {
 		golden: "blonde légère",
 		belgian: "blonde belge",
 		ale: "bière anglaise",
@@ -55,7 +55,7 @@ export function UserStatsProvider({ children }: { children: ReactNode }) {
 				setUserStats,
 				userAssessmentScore,
 				setUserAssessmentScore,
-				BEER_TYPES,
+				BEER_CATEGORIES,
 			}}
 		>
 			{children}

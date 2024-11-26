@@ -14,23 +14,21 @@ function AssessmentAnswers({
 }: AssessmentAnswersType) {
 	const { setUserAssessmentScore } = useUserStats();
 
+	const handleClick = () => {
+		setCurrentAssessmentStep((prevStep) => prevStep + 1);
+		setUserAssessmentScore((prev) => ({
+			...prev,
+			[answer.type]: prev[answer.type] + 1,
+		}));
+	};
+
 	return (
 		<button
 			type="button"
-			onClick={() => {
-				setCurrentAssessmentStep((prevStep) => prevStep + 1);
-				setUserAssessmentScore((prev) => ({
-					...prev,
-					[answer.type]: prev[answer.type] + 1,
-				}));
-			}}
+			onClick={handleClick}
 			onKeyUp={(event) => {
 				if (event.key === " " || event.key === "enter") {
-					setCurrentAssessmentStep((prevStep) => prevStep + 1);
-					setUserAssessmentScore((prev) => ({
-						...prev,
-						[answer.type]: prev[answer.type] + 1,
-					}));
+					handleClick();
 				}
 			}}
 		>
