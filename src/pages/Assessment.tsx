@@ -1,6 +1,9 @@
 import { useState } from "react";
 
+import AssessmentAnswers from "../component/AssessmentAnswers";
 import AssessmentButton from "../component/AssessmentButton";
+import AssessmentResult from "../component/AssessmentResults";
+
 import assessmentContent from "../data/AssessmentContent";
 
 import "./Assessment.css";
@@ -14,20 +17,6 @@ function Assessment() {
 	const [currentAssessmentStep, setCurrentAssessmentStep] = useState<number>(
 		TEST_STEPS.startTest,
 	);
-
-	const [userScore, setUserScore] = useState<{
-		golden: number;
-		belgian: number;
-		ale: number;
-		ipa: number;
-		hazy: number;
-	}>({
-		golden: 0,
-		belgian: 0,
-		ale: 0,
-		ipa: 0,
-		hazy: 0,
-	});
 
 	const questionKey =
 		`question${currentAssessmentStep}` as keyof typeof assessmentContent;
@@ -51,10 +40,7 @@ function Assessment() {
 					/>
 				</header>
 			) : currentAssessmentStep === TEST_STEPS.endTest ? (
-				<header className="assessment-content">
-					<h1>Bravo !</h1>
-					<p className="header-txt">Voici votre résultat :</p>
-				</header>
+				<AssessmentResult setCurrentAssessmentStep={setCurrentAssessmentStep} />
 			) : (
 				<header className="assessment-content">
 					<p className="header-txt">
@@ -66,28 +52,11 @@ function Assessment() {
 								type: "golden" | "belgian" | "ale" | "ipa" | "hazy";
 								sentence: string;
 							}) => (
-								<button
+								<AssessmentAnswers
+									answer={answer}
+									setCurrentAssessmentStep={setCurrentAssessmentStep}
 									key={answer.type}
-									type="button"
-									onClick={() => {
-										setCurrentAssessmentStep((prevStep) => prevStep + 1);
-										setUserScore((prev) => ({
-											...prev,
-											[answer.type]: prev[answer.type] + 1,
-										}));
-									}}
-									onKeyUp={(event) => {
-										if (event.key === " " || event.key === "enter") {
-											setCurrentAssessmentStep((prevStep) => prevStep + 1);
-											setUserScore((prev) => ({
-												...prev,
-												[answer.type]: prev[answer.type] + 1,
-											}));
-										}
-									}}
-								>
-									{answer.sentence}
-								</button>
+								/>
 							),
 						)}
 					</div>
