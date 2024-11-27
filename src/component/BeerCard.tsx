@@ -1,4 +1,6 @@
 import "./Beercard.css";
+import { useState } from "react";
+import type React from "react";
 
 interface BeerCardProps {
 	beer: {
@@ -26,6 +28,8 @@ interface BeerCardProps {
 }
 
 const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
+	const [isFlipped, setIsFlipped] = useState(false);
+
 	const abvNumber = Number.parseFloat(beer.abv.replace("%", ""));
 	let getColorByAlcoholLevelClass = "";
 	if (abvNumber < 4.99) {
@@ -38,25 +42,69 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 		getColorByAlcoholLevelClass = "dark-color";
 	}
 
+	const handleFlip = () => {
+		setIsFlipped(!isFlipped);
+	};
+
+	const handleClick = () => {
+		handleFlip();
+		if (handleUserCardSelect) {
+			handleUserCardSelect(beer);
+		}
+	};
+
+	const handleKeyUp = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter" || e.key === " ") {
+			handleFlip();
+			if (handleUserCardSelect) {
+				handleUserCardSelect(beer);
+			}
+		}
+	};
+
 	return (
 		<div
-			className="beer-card"
-			onClick={
-				handleUserCardSelect ? () => handleUserCardSelect(beer) : undefined
-			}
-			onKeyUp={
-				handleUserCardSelect ? () => handleUserCardSelect(beer) : undefined
-			}
+			className={`beer-card ${isFlipped ? "flipped" : ""}`}
+			onClick={handleClick}
+			onKeyUp={handleKeyUp}
 		>
-			<div className="container-name">
-				<h2>{beer.name}</h2>
+			<div className="beer-card-font">
+				<div className="container-name">
+					<h2>{beer.name}</h2>
+				</div>
+
+				<div className={`container-number ${getColorByAlcoholLevelClass}`}>
+					<h3>{beer.abv}</h3>
+				</div>
+
+				<button
+					className="container-I-card"
+					onClick={handleClick}
+					onKeyUp={handleKeyUp}
+					tabIndex={0}
+					type="button"
+				>
+					<h3>I</h3>
+				</button>
 			</div>
 
-			<div className={`container-number ${getColorByAlcoholLevelClass}`}>
-				<h3>{beer.abv}</h3>
-			</div>
-			<div className="container-I-card">
-				<h3>I</h3>
+			<div className="beer-card-back">
+				<p>
+					<strong>Food Pairing:</strong> {beer.food_pairing}
+				</p>
+
+				<button
+					className="container-I-card-back"
+					onClick={handleClick}
+					onKeyUp={handleKeyUp}
+					tabIndex={0}
+					type="button"
+				>
+					<h3>I</h3>
+				</button>
+				<div className={`container-number-back ${getColorByAlcoholLevelClass}`}>
+					<h3>{beer.abv}</h3>
+				</div>
 			</div>
 		</div>
 	);
