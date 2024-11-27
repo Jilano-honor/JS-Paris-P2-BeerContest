@@ -36,3 +36,11 @@ header.assessment-content #assessment-results-lists div ul li {
 header.assessment-content #assessment-results-lists div#beers-exemple ul li {
 	list-style: beer outside;
 }
+
+@media screen and (max-width: 768px) {
+	header.assessment-content #assessment-results-lists {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+}

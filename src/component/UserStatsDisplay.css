@@ -1,0 +1,38 @@
+main#game-main div#game-stats article {
+	display: grid;
+	grid-template: repeat(6, 1fr) / auto 1fr;
+	column-gap: 3rem;
+	row-gap: 0.5rem;
+
+	width: 100%;
+	background-color: black;
+	opacity: 70%;
+	color: white;
+
+	padding: 2rem;
+}
+
+main#game-main div#game-stats article #header-nb-games {
+	grid-column-end: span 2;
+	font-style: italic;
+}
+
+.stats-taux {
+	text-indent: 2rem;
+}
+
+@counter-style circled-numbers {
+	system: cyclic;
+	symbols: "\002780" "\002781" "\002782" "\002783" "\002784";
+	suffix: " ";
+}
+
+#assessment-results ul {
+	margin-left: 2rem;
+}
+
+#assessment-results ul li {
+	list-style: circled-numbers outside;
+	text-indent: 1rem;
+	line-height: 1.2;
+}

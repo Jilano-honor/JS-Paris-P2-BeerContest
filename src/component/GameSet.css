@@ -65,6 +65,10 @@ section#game-alcohol-level {
 	position: absolute;
 	right: 75%;
 	top: 35%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 img#imagealcohollevel {
 	height: 250px;
@@ -91,6 +95,29 @@ div#progresse-bar {
 	left: -80px;
 	top: -60px;
 }
+
+#boost {
+	margin: 0 auto;
+	margin-top: -35px;
+}
+
+#boost p {
+	display: none;
+	border-radius: 5px;
+}
+
+#boost:hover p {
+	display: inline-block;
+	position: absolute;
+	background-color: var(--second-color);
+	font-size: 0.8rem;
+	padding: 1rem;
+}
+
+#boost .boost-off {
+	filter: grayscale(1);
+}
+
 .drunk-light {
 	animation: drunkLight 2.5s ease-in-out infinite;
 	filter: blur(1px);

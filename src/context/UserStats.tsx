@@ -18,6 +18,9 @@ interface UserStatsContextType {
 		ipa: string;
 		hazy: string;
 	};
+	sortedType: [string, number][];
+	userMaxKey: "golden" | "belgian" | "ale" | "ipa" | "hazy";
+	maxValue: number;
 }
 
 const UserStats = createContext<UserStatsContextType | null>(null);
@@ -41,12 +44,22 @@ export function UserStatsProvider({ children }: { children: ReactNode }) {
 		});
 
 	const BEER_CATEGORIES = {
-		golden: "blonde légère",
-		belgian: "blonde belge",
+		golden: "bière blonde légère",
+		belgian: "bière blonde belge",
 		ale: "bière anglaise",
 		ipa: "IPA",
 		hazy: "IPA de caractère",
 	};
+
+	const maxValue = Math.max(...Object.values(userAssessmentScore));
+	const userMaxKey = Object.keys(userAssessmentScore).find(
+		(key) =>
+			userAssessmentScore[key as keyof typeof userAssessmentScore] === maxValue,
+	) as keyof typeof BEER_CATEGORIES;
+
+	const sortedType = Object.entries(userAssessmentScore).sort(
+		([, A], [, B]) => B - A,
+	);
 
 	return (
 		<UserStats.Provider
@@ -56,6 +69,9 @@ export function UserStatsProvider({ children }: { children: ReactNode }) {
 				userAssessmentScore,
 				setUserAssessmentScore,
 				BEER_CATEGORIES,
+				sortedType,
+				userMaxKey,
+				maxValue,
 			}}
 		>
 			{children}

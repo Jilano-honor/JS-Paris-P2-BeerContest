@@ -4,7 +4,7 @@ import "./Game.css";
 
 import GameSet from "../component/GameSet";
 import PopUp from "../component/PopUp";
-import { useUserStats } from "../context/UserStats";
+import UserStatsDisplay from "../component/UserStatsDisplay";
 
 function Game() {
 	const GAME_STATES = { start: 0, ingame: 1, end: 2 };
@@ -19,8 +19,6 @@ function Game() {
 			: alcoholLevel >= 25
 				? "gameHighAlcohol"
 				: "gameMiddleAlcohol";
-
-	const { userStats } = useUserStats();
 
 	return (
 		<main id="game-main">
@@ -48,23 +46,7 @@ function Game() {
 							? "Masquer mes statistiques"
 							: "Afficher mes statistiques"}
 					</button>
-					{statsDisplayed ? (
-						<article>
-							<p>Nombre de parties terminées</p>
-							<p>{userStats.gamePlayed}</p>
-							<p>Niveau d'alcoolémie moyen par partie</p>
-							<p>{userStats.gamePlayed}</p>
-							<p id="header-nb-games">Nombre de partie avec... </p>
-							<p className="stats-taux">...un taux d'alcoolémie faible</p>
-							<p>{userStats.gameLowAlcohol}</p>
-							<p className="stats-taux">...un taux d'alcoolémie modéré</p>
-							<p>{userStats.gameMiddleAlcohol}</p>
-							<p className="stats-taux">...un taux d'alcoolémie élevé</p>
-							<p>{userStats.gameHighAlcohol}</p>
-						</article>
-					) : (
-						<></>
-					)}
+					{statsDisplayed ? <UserStatsDisplay /> : <></>}
 				</div>
 			</section>
 			<section id="game-gameset">

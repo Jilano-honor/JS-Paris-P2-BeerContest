@@ -65,3 +65,34 @@
 
 	cursor: pointer;
 }
+
+.character-image-mobile {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	#main-assessment {
+		min-height: 85vh;
+		height: max-content;
+		width: 100vw;
+	}
+
+	.assessment-content {
+		position: static;
+		height: auto;
+		width: 100%;
+		top: 0;
+		right: 0;
+		border-radius: 0;
+	}
+
+	.character-image {
+		display: none;
+	}
+
+	.character-image-mobile {
+		display: inline-block;
+		position: static;
+		width: 200px;
+	}
+}
