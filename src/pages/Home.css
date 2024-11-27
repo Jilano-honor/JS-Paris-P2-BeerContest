@@ -58,6 +58,7 @@
 	#main-home {
 		min-height: 85vh;
 		height: max-content;
+		width: 100vw;
 	}
 
 	#header-home {

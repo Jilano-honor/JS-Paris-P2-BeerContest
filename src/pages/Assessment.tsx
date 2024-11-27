@@ -32,6 +32,11 @@ function Assessment() {
 			{currentAssessmentStep === TEST_STEPS.startTest ? (
 				<header className="assessment-content" id="assessment-intro">
 					<h1>Hello !</h1>
+					<img
+						src="src\assets\barman.png"
+						alt="Le barman"
+						className="character-image-mobile"
+					/>
 					<p className="header-txt">
 						Je vais te poser quelques questions pour déterminer ton deck.
 					</p>
