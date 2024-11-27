@@ -225,7 +225,9 @@ function GameSet({
 					<div id="verticale-bar" style={{ height: alcoholLevel * 4.5 }} />
 				</div>
 				<div id="boost-and-progress">
-					<p id="progress-alcohol-level">{alcoholLevel}%</p>
+					<p id="progress-alcohol-level">
+						{Math.round(alcoholLevel * 10) / 10}%
+					</p>
 					<div id="boost">
 						<img
 							src="/src/assets/boost.png"
