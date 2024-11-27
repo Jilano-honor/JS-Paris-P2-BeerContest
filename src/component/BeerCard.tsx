@@ -89,7 +89,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 				</button>
 
 				<div className={`container-number ${getColorByAlcoholLevelClass}`}>
-					<h3>{beer.abv}</h3>
+					<h3>{beer.abv.slice(0, -2)}%</h3>
 				</div>
 
 				<button
@@ -127,7 +127,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 					<h3>i</h3>
 				</button>
 				<div className={`container-number-back ${getColorByAlcoholLevelClass}`}>
-					<h3>{beer.abv}</h3>
+					<h3>{beer.abv.slice(0, -2)}%</h3>
 				</div>
 			</div>
 		</div>
