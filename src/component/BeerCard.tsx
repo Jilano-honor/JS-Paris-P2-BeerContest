@@ -46,32 +46,47 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 		setIsFlipped(!isFlipped);
 	};
 
-	const handleClick = () => {
-		handleFlip();
-		if (handleUserCardSelect) {
-			handleUserCardSelect(beer);
+	const handleClick = (e: React.MouseEvent) => {
+		if (
+			e.target instanceof HTMLElement &&
+			e.target.classList.contains("container-I-card")
+		) {
+			e.stopPropagation();
 		}
+		handleFlip();
 	};
 
 	const handleKeyUp = (e: React.KeyboardEvent) => {
+		if (
+			e.target instanceof HTMLElement &&
+			e.target.classList.contains("container-I-card")
+		) {
+			e.stopPropagation();
+		}
 		if (e.key === "Enter" || e.key === " ") {
 			handleFlip();
-			if (handleUserCardSelect) {
-				handleUserCardSelect(beer);
-			}
 		}
 	};
 
+	const handleSelectCard = () => {
+		handleUserCardSelect ? handleUserCardSelect(beer) : undefined;
+	};
+
 	return (
-		<div
-			className={`beer-card ${isFlipped ? "flipped" : ""}`}
-			onClick={handleClick}
-			onKeyUp={handleKeyUp}
-		>
+		<div className={`beer-card ${isFlipped ? "flipped" : ""}`}>
 			<div className="beer-card-font">
 				<div className="container-name">
 					<h2>{beer.name}</h2>
 				</div>
+
+				<button
+					className="card-user-selctioned"
+					type="button"
+					onClick={handleSelectCard}
+					onKeyUp={handleSelectCard}
+				>
+					Sélectionner
+				</button>
 
 				<div className={`container-number ${getColorByAlcoholLevelClass}`}>
 					<h3>{beer.abv}</h3>
@@ -84,7 +99,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 					tabIndex={0}
 					type="button"
 				>
-					<h3>I</h3>
+					<h3>i</h3>
 				</button>
 			</div>
 
@@ -94,13 +109,22 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 				</p>
 
 				<button
-					className="container-I-card-back"
+					className="card-user-selctioned"
+					type="button"
+					onClick={handleSelectCard}
+					onKeyUp={handleSelectCard}
+				>
+					Sélectionner
+				</button>
+
+				<button
+					className="container-I-card"
 					onClick={handleClick}
 					onKeyUp={handleKeyUp}
 					tabIndex={0}
 					type="button"
 				>
-					<h3>I</h3>
+					<h3>i</h3>
 				</button>
 				<div className={`container-number-back ${getColorByAlcoholLevelClass}`}>
 					<h3>{beer.abv}</h3>

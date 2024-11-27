@@ -89,6 +89,11 @@
 	border: solid var(--dark-color) 5px;
 	background-color: var(--dark-color);
 	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
 }
 
 .container-I-card h3 {
@@ -102,8 +107,8 @@
 }
 
 .beer-card-back {
-	width: 110px;
-	height: 125px;
+	width: 100%;
+	height: 100%;
 	background-color: var(--light-color);
 	border-radius: 20px;
 	border: 10px solid var(--dark-color);
@@ -167,8 +172,8 @@
 	border: solid var(--dark-color) 5px;
 	background-color: var(--dark-color);
 	border-radius: 50%;
-	position: absolute;
 }
+
 .container-I-card-back h3 {
 	font-family: "Calligraffitti", sans-serif;
 	font-size: 17px;
@@ -193,4 +198,33 @@
 .container-number-back h3 {
 	font-size: 18px;
 	color: white;
+}
+
+#computer-deck .card-user-selctioned,
+#game-area .card-user-selctioned {
+	display: none;
+}
+
+.card-user-selctioned {
+	position: absolute;
+	top: 22.5%;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	padding: 1rem;
+
+	background-color: var(--dark-color);
+	border-radius: 30px;
+	border: none;
+	box-shadow: 2px 2px 5px 2px #000000b1;
+
+	font-family: "Hind Vadadora", sans-serif;
+	font-size: 0.8rem;
+	color: white;
+
+	cursor: pointer;
+}
+
+.beer-card:hover .card-user-selctioned {
+	opacity: 1;
+	z-index: 3;
 }
