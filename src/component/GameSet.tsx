@@ -223,18 +223,20 @@ function GameSet({
 				/>
 				<div id="progresse-bar">
 					<div id="verticale-bar" style={{ height: alcoholLevel * 4.5 }} />
-					<div id="progresse-alcohol-level">{alcoholLevel}%</div>
 				</div>
-				<div id="boost">
-					<img
-						src="/src/assets/boost.png"
-						alt="boost"
-						className={boostOn ? "" : "boost-off"}
-						width="30px"
-					/>
-					<p id="boost-description">
-						Fais le test et découvre ton type de bière pour gagner un boost
-					</p>
+				<div id="boost-and-progress">
+					<p id="progress-alcohol-level">{alcoholLevel}%</p>
+					<div id="boost">
+						<img
+							src="/src/assets/boost.png"
+							alt="boost"
+							className={boostOn ? "" : "boost-off"}
+							width="30px"
+						/>
+						<p id="boost-description">
+							Fais le test et découvre ton type de bière pour gagner un boost
+						</p>
+					</div>
 				</div>
 			</section>
 			<button
@@ -281,9 +283,17 @@ function GameSet({
 					{userCard ? (
 						<BeerCard beer={userCard} />
 					) : (
-						<h3 id="pick-card">
-							Choisis une carte <br />v
-						</h3>
+						<>
+							<h3 id="pick-card">
+								Choisis une carte <br />
+								<img
+									src="/src/assets/arrow.png"
+									alt="flèche vers le bas"
+									width="60px"
+									id="arrow"
+								/>
+							</h3>
+						</>
 					)}
 				</div>
 			</section>

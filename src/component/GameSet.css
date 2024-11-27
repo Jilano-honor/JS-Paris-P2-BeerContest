@@ -32,12 +32,16 @@ section#game-area {
 section#game-area h3#pick-card {
 	position: absolute;
 	top: 45%;
-	left: 40%;
+	left: 42%;
 
 	font-size: 2rem;
 	text-align: center;
 	color: white;
 	line-height: 2;
+}
+
+section#game-area h3#pick-card img {
+	filter: invert(1);
 }
 
 .button-user-cards {
@@ -88,33 +92,42 @@ div#progresse-bar {
 	opacity: 0.75;
 	transition: all 1.5s linear;
 }
-#progresse-alcohol-level {
-	display: inline-block;
-	font-size: x-large;
-	position: relative;
-	left: -80px;
-	top: -60px;
+
+#progress-alcohol-level {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: white;
+
+	background-color: var(--dark-color);
+	padding: 0.3rem 0.8rem;
+	border-radius: 30px;
+	box-shadow: 2px 2px 2px 0px #0000009a;
 }
 
-#boost {
+#boost-and-progress {
 	margin: 0 auto;
 	margin-top: -35px;
+
+	display: flex;
+	gap: 0.3rem;
 }
 
-#boost p {
+#boost-and-progress p#boost-description {
 	display: none;
 	border-radius: 5px;
+	width: 200px;
 }
 
-#boost:hover p {
+#boost:hover p#boost-description {
 	display: inline-block;
 	position: absolute;
 	background-color: var(--second-color);
 	font-size: 0.8rem;
 	padding: 1rem;
+	z-index: 3;
 }
 
-#boost .boost-off {
+#boost-and-progress .boost-off {
 	filter: grayscale(1);
 }
 
