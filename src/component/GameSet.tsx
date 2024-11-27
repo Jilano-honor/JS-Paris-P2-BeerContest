@@ -204,6 +204,8 @@ function GameSet({
 		setCurrentGameState(gameStates.end);
 		setRoundMsg(null);
 		setAlcoholLevel(0);
+		setComputerCard(null);
+		setUserCard(null);
 
 		setUserStats((prevStats: UserStatsType) => ({
 			...prevStats,
