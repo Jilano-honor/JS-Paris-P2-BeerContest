@@ -237,14 +237,18 @@ function GameSet({
 					</p>
 				</div>
 			</section>
-			<button
-				type="button"
-				className="game-buttons"
-				id="button-reload"
-				onClick={() => createDecks(beers)}
-			>
-				Recharger les decks
-			</button>
+			{decks.user.length === 5 ? (
+				<button
+					type="button"
+					className="game-buttons"
+					id="button-reload"
+					onClick={() => createDecks(beers)}
+				>
+					Recharger les decks
+				</button>
+			) : (
+				<></>
+			)}
 			<section className="deck" id="computer-deck">
 				{decks.computer.length > 0 ? (
 					decks.computer.map((beer) => {
@@ -304,24 +308,11 @@ function GameSet({
 						}
 
 						return (
-							<button
-								type="button"
-								className="button-user-cards"
-								key={`player ${beer.sku} ${Math.random()}`}
-								onClick={() => handleUserCardSelect(beer)}
-								tabIndex={0}
-								onKeyDown={(event) => {
-									if (event.key === " ") {
-										handleUserCardSelect(beer);
-									}
-								}}
-							>
-								<BeerCard
-									key={`player-${beer.sku}-${Math.random()}`}
-									beer={beer}
-									handleUserCardSelect={handleUserCardSelect}
-								/>
-							</button>
+							<BeerCard
+								key={`player-${beer.sku}-${Math.random()}`}
+								beer={beer}
+								handleUserCardSelect={handleUserCardSelect}
+							/>
 						);
 					})
 				) : (
