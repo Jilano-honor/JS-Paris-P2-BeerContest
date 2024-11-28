@@ -2,25 +2,27 @@
 	height: 85vh;
 	background-size: cover;
 	background-image: url("/src/assets/accueil_720.jpg");
+	background-position: 0% 26%;
 	position: relative;
 }
 
-#header-home {
+.entrance-game {
 	display: flex;
 	flex-direction: row-reverse;
 	height: 359px;
 }
 
-#header-home h1 {
+.entrance-game h1 {
 	margin-bottom: 50px;
 	flex-grow: 1;
 }
-#header-home h1,
-#header-home p {
+
+.entrance-game h1,
+.entrance-game p {
 	color: ivory;
 }
 
-#header-home p.header-txt {
+.entrance-game p.header-txt {
 	font-size: 1.1rem;
 }
 
@@ -39,14 +41,14 @@
 
 	position: absolute;
 	top: 10%;
-	right: 5%;
+	right: 10%;
 }
 
 .character-image {
 	width: 400px;
 	height: auto;
 	position: absolute;
-	left: 10%;
+	left: 15%;
 	bottom: 2%;
 }
 
@@ -59,10 +61,6 @@
 		min-height: 85vh;
 		height: max-content;
 		width: 100vw;
-	}
-
-	#header-home {
-		height: auto;
 	}
 
 	.entrance-game {

@@ -1,6 +1,6 @@
 main#game-main {
 	display: grid;
-	grid-template: 2fr 2fr / 500px 2fr;
+	grid-template: 2fr 2fr / 35vw 2fr;
 	height: 85vh;
 
 	background-image: url("../assets/game-background.jpg");
@@ -46,6 +46,7 @@ main#game-main section#game-gameset {
 	align-items: center;
 
 	position: relative;
+	margin: 2rem 0 1rem 0;
 }
 
 main#game-main article#game-rules {

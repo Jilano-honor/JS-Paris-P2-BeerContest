@@ -1,13 +1,13 @@
 main#game-main section#pop-up {
 	display: flex;
 	justify-content: center;
-	gap: 2rem;
+	gap: 3rem;
 
 	position: absolute;
 	top: 25%;
 	margin: 0;
 	left: 23%;
-	padding: 5rem 3rem;
+	padding: 5rem 2rem;
 	z-index: 1;
 
 	background-color: var(--light-color);
@@ -16,8 +16,8 @@ main#game-main section#pop-up {
 }
 
 main#game-main section#pop-up img#barman {
-	width: 25%;
-	height: auto;
+	width: 30%;
+	height: 100%;
 }
 
 main#game-main section#pop-up div.pop-up-txt {
@@ -27,6 +27,10 @@ main#game-main section#pop-up div.pop-up-txt {
 	align-items: center;
 
 	width: 30rem;
+}
+
+main#game-main section#pop-up div.pop-up-txt h2 {
+	padding-bottom: 1rem;
 }
 
 main#game-main section#pop-up div button {
