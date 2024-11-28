@@ -1,6 +1,6 @@
 main#game-main {
 	display: grid;
-	grid-template: 2fr 2fr / 35vw 2fr;
+	grid-template: 2fr 1fr / 35vw 2fr;
 	height: 85vh;
 
 	background-image: url("../assets/game-background.jpg");
@@ -50,7 +50,7 @@ main#game-main section#game-gameset {
 }
 
 main#game-main article#game-rules {
-	margin-top: 30%;
+	margin-top: 10%;
 	padding: 1em;
 
 	color: white;
