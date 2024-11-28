@@ -1,0 +1,230 @@
+.beer-card {
+	width: 10%;
+	height: 170px;
+	position: relative;
+	perspective: 1000px;
+	margin: 1rem;
+}
+
+.beer-card-font,
+.beer-card-back {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	backface-visibility: hidden;
+	transition: transform 0.6s ease;
+	transform-style: preserve-3d;
+
+	background-color: var(--light-color);
+	border-radius: 20px;
+	border: 7px solid var(--dark-color);
+
+	display: flex;
+	flex-direction: column;
+
+	text-align: center;
+}
+
+.beer-card-font {
+	transform: rotateY(0deg);
+
+	justify-content: space-between;
+}
+
+.beer-card-font::before {
+	content: "";
+	background-image: url("../assets/beer_480.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	backface-visibility: hidden;
+	background-position: center;
+	transform: rotate(-30deg);
+	position: absolute;
+	top: 30%;
+	left: 20%;
+	width: 62%;
+	height: 60%;
+}
+
+.beer-card-back {
+	justify-content: flex-end;
+
+	transform: rotateY(180deg);
+
+	padding: 0px;
+	z-index: 1;
+}
+
+.beer-card-back::before {
+	content: "";
+	background-image: url("../assets/fork.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	top: 10%;
+	left: 30%;
+	width: 45%;
+	height: 30%;
+	z-index: 1;
+}
+
+.container-name {
+	background-color: var(--dark-color);
+	min-height: 40px;
+	width: 101%;
+
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.container-name h2 {
+	font-family: "Hind Vadadora", sans-serif;
+	font-size: 0.6rem;
+	color: rgba(255, 255, 255, 0.808);
+}
+
+.container-number {
+	padding: 5px;
+	border-radius: 50%;
+	align-self: flex-end;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: -15px;
+	right: -15px;
+}
+
+.second-color {
+	background-color: var(--second-color);
+}
+
+.light-color {
+	background-color: var(--light-color);
+}
+
+.dark-color {
+	background-color: var(--dark-color);
+}
+
+.container-number h3 {
+	font-size: 18px;
+	color: white;
+}
+
+.container-I-card {
+	width: 20px;
+	height: 20px;
+	border: none;
+	background-color: var(--main-color);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+	left: 3px;
+	bottom: 3px;
+
+	cursor: pointer;
+	color: ivory;
+}
+
+.beer-card.flipped .beer-card-font {
+	transform: rotateY(180deg);
+}
+
+.beer-card-back p {
+	font-family: "Calligraffitti", sans-serif;
+	font-size: 10px;
+	color: rgba(35, 33, 33, 0.966);
+	margin-top: 5px;
+	margin-bottom: 25%;
+}
+
+.beer-card.flipped .beer-card-back {
+	transform: rotateY(0deg);
+}
+
+.beer-card-flip {
+	transition: transform 0.6s ease;
+}
+
+#game-area {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+}
+
+#computer-selected-card .beer-card,
+#user-selected-card .beer-card {
+	width: 155px;
+	height: 75%;
+	box-sizing: border-box;
+	margin-top: 2rem;
+}
+
+#computer-selected-card .container-name,
+#user-selected-card .container-name {
+	min-height: 60px;
+}
+
+#computer-selected-card .container-name h2,
+#user-selected-card .container-name h2 {
+	font-size: 0.8rem;
+}
+
+.container-number-back {
+	padding: 5px;
+	border-radius: 50%;
+	align-self: flex-end;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: -15px;
+	right: -15px;
+}
+
+.container-number-back h3 {
+	font-size: 18px;
+	color: white;
+}
+
+#computer-deck .card-user-selctioned,
+#game-area .card-user-selctioned {
+	display: none;
+}
+
+.card-user-selctioned {
+	position: absolute;
+	top: 30%;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	padding: 1rem;
+
+	background-color: var(--dark-color);
+	border-radius: 30px;
+	border: none;
+	box-shadow: 2px 2px 5px 2px #000000b1;
+
+	font-family: "Hind Vadadora", sans-serif;
+	font-size: 0.8rem;
+	color: white;
+
+	cursor: pointer;
+}
+
+.beer-card:hover .card-user-selctioned {
+	opacity: 1;
+	z-index: 3;
+}

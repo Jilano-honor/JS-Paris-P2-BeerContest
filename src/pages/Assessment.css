@@ -1,0 +1,99 @@
+#main-assessment {
+	height: 85vh;
+	background-size: cover;
+	background-image: url("/src/assets/accueil_720.jpg");
+	background-position: 0% 26%;
+	position: relative;
+}
+
+#assessment-header {
+	display: flex;
+	height: 359px;
+}
+
+#assessment-header h1,
+#assessment-header p {
+	color: ivory;
+}
+
+#assessment-header p.header-txt {
+	font-size: 1.1rem;
+}
+
+.assessment-content {
+	background-color: rgba(0, 0, 0, 0.6);
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2rem;
+
+	width: 905px;
+	min-height: 399px;
+	margin: 0 auto;
+	padding: 50px;
+
+	border-radius: 2rem;
+	position: absolute;
+	top: 10%;
+	right: 10%;
+
+	color: ivory;
+}
+
+.assessment-answers {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	gap: 1rem;
+}
+
+#assessment-intro {
+	align-items: center;
+}
+
+.assessment-answers button {
+	background-color: var(--dark-color);
+
+	border: none;
+	border-radius: 50px;
+	box-shadow: 5px 5px 5px 5px black;
+	padding: .5rem;
+
+	font-family: "Hind Vadodara", sans-serif;
+	font-size: 1rem;
+	color: ivory;
+
+	cursor: pointer;
+}
+
+.character-image-mobile {
+	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	#main-assessment {
+		min-height: 85vh;
+		height: max-content;
+		width: 100vw;
+	}
+
+	.assessment-content {
+		position: static;
+		height: auto;
+		width: 100%;
+		top: 0;
+		right: 0;
+		border-radius: 0;
+	}
+
+	.character-image {
+		display: none;
+	}
+
+	.character-image-mobile {
+		display: inline-block;
+		position: static;
+		width: 200px;
+	}
+}

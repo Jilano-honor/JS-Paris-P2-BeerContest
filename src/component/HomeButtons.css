@@ -1,0 +1,99 @@
+@keyframes shuffle {
+	0% {
+		rotate: 0deg;
+	}
+	10% {
+		rotate: 25deg;
+	}
+	20% {
+		rotate: 0deg;
+	}
+	30% {
+		rotate: -25deg;
+	}
+	40% {
+		rotate: 0deg;
+	}
+	50% {
+		rotate: 25deg;
+	}
+	60% {
+		rotate: 0deg;
+	}
+	70% {
+		rotate: -25deg;
+	}
+	80% {
+		rotate: 0deg;
+	}
+	90% {
+		rotate: 0deg;
+	}
+	100% {
+		rotate: 0deg;
+	}
+}
+
+#home-buttons {
+	display: flex;
+	gap: 3rem;
+}
+
+#home-buttons .home-button {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	padding: 2rem 3rem;
+	margin-top: 40px;
+	gap: 20px;
+	width: 280px;
+	height: 90px;
+
+	background: linear-gradient(
+		to bottom left,
+		var(--light-color),
+		var(--main-color)
+	);
+	border-radius: 50px;
+	border: inset 10px var(--dark-color);
+
+	cursor: pointer;
+}
+
+#home-buttons .home-button p {
+	color: white;
+	font-family: "Marck Script", sans-serif;
+	font-size: 2rem;
+}
+
+#home-buttons .home-button p#deck-button-text {
+	font-size: 1.4rem;
+}
+
+#home-buttons .home-button img {
+	width: 50px;
+	height: auto;
+	object-fit: contain;
+	border-radius: 90%;
+}
+
+#home-buttons .home-button img#logo-deck {
+	filter: invert(1);
+}
+
+#home-buttons .home-button:hover img {
+	animation-name: shuffle;
+	animation-duration: 0.5s;
+	animation-iteration-count: infinite;
+}
+
+#home-buttons .home-button:hover p {
+	color: var(--dark-color);
+}
+
+@media screen and (max-width: 768px) {
+	#home-buttons {
+		flex-direction: column;
+		gap: 0;
+	}
+}

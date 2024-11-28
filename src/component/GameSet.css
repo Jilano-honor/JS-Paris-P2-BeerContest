@@ -1,0 +1,340 @@
+button#button-reload {
+	position: absolute;
+	top: -1rem;
+	right: 2rem;
+}
+
+section.deck {
+	display: flex;
+	justify-content: center;
+	gap: 2rem;
+
+	width: 100%;
+}
+
+section.deck article.temp-card {
+	width: 100px;
+	height: 100px;
+	background-color: var(--main-color);
+}
+
+section#game-area {
+	background-image: url("../assets/green.jpg");
+	background-size: cover;
+
+	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.8);
+
+	width: 500px;
+	height: 300px;
+}
+
+section#game-area h3#pick-card {
+	position: absolute;
+	top: 45%;
+	left: 41%;
+
+	font-size: 2rem;
+	text-align: center;
+	color: white;
+	line-height: 2;
+}
+
+section#game-area h3#pick-card img {
+	filter: invert(1);
+}
+
+.button-user-cards {
+	font: inherit;
+	border: none;
+	padding: 0;
+}
+
+div#round-msg {
+	position: absolute;
+	top: 15rem;
+	right: 0;
+	margin: 0 auto;
+
+	background-color: rgba(0, 0, 0, 0.8);
+	width: 200px;
+	padding: 2rem;
+}
+
+div#round-msg h3 {
+	color: white;
+}
+
+section#game-alcohol-level {
+	position: absolute;
+	right: 75%;
+	top: 35%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+img#imagealcohollevel {
+	height: 250px;
+}
+
+div#progresse-bar {
+	position: absolute;
+	bottom: 60px;
+	right: 85px;
+}
+
+#verticale-bar {
+	width: 90px;
+	background-color: rgb(255, 217, 0);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 15px;
+	opacity: 0.75;
+	transition: all 1.5s linear;
+}
+
+#progress-alcohol-level {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: white;
+}
+
+#boost-and-progress {
+	margin: 0 auto;
+	margin-top: -35px;
+
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+
+	background-color: var(--light-color);
+	padding: 0.3rem 0.8rem;
+	border-radius: 30px;
+	box-shadow: 2px 2px 2px 0px #0000009a;
+}
+
+#boost-and-progress p#boost-description {
+	display: none;
+	border-radius: 5px;
+	width: 200px;
+}
+
+#boost:hover p#boost-description {
+	display: inline-block;
+	position: absolute;
+	background-color: var(--second-color);
+	font-size: 0.8rem;
+	padding: 1rem;
+	z-index: 3;
+}
+
+#boost-and-progress .boost-off {
+	filter: grayscale(1);
+}
+
+.drunk-light {
+	animation: drunkLight 2.5s ease-in-out infinite;
+	filter: blur(1px);
+}
+
+.drunk-medium {
+	animation: drunkMedium 2s ease-in-out infinite;
+	filter: blur(1.25px);
+}
+
+.drunk-high {
+	animation: drunkHigh 1.5s ease-in-out infinite;
+	filter: blur(1.5px);
+}
+
+.drunk-very-high {
+	animation: drunkVeryHigh 1s ease-in-out infinite;
+	filter: blur(1.75px);
+}
+
+.drunk-extreme {
+	animation: drunkExtreme 0.5s ease-in-out infinite;
+	filter: blur(2px);
+}
+
+@keyframes drunkLight {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkMedium {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkHigh {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkVeryHigh {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
+
+@keyframes drunkExtreme {
+	0% {
+		filter: blur(0);
+	}
+	10% {
+		filter: blur(12px);
+	}
+	20% {
+		filter: blur(12px);
+	}
+	30% {
+		filter: blur(10px);
+	}
+	40% {
+		filter: blur(12px);
+	}
+	50% {
+		filter: blur(10px);
+	}
+	60% {
+		filter: blur(12px);
+	}
+	70% {
+		filter: blur(10px);
+	}
+	80% {
+		filter: blur(12px);
+	}
+	90% {
+		filter: blur(10px);
+	}
+	100% {
+		filter: blur(0);
+	}
+}
