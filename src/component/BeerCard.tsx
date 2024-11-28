@@ -1,4 +1,4 @@
-import "Jilano-honor/JS-Paris-P2-BeerContest/src/component/BeerCard.css";
+import "./BeerCard.css";
 import { useState } from "react";
 import type React from "react";
 
