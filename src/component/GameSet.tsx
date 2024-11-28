@@ -235,7 +235,7 @@ function GameSet({
 							src="/src/assets/boost.png"
 							alt="boost"
 							className={boostOn ? "" : "boost-off"}
-							width="30px"
+							width="20px"
 						/>
 						<p id="boost-description">
 							Fais le test et découvre ton type de bière pour gagner un boost

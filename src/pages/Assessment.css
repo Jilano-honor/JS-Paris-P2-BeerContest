@@ -2,6 +2,7 @@
 	height: 85vh;
 	background-size: cover;
 	background-image: url("/src/assets/accueil_720.jpg");
+	background-position: 0% 26%;
 	position: relative;
 }
 
@@ -35,7 +36,7 @@
 	border-radius: 2rem;
 	position: absolute;
 	top: 10%;
-	right: 5%;
+	right: 10%;
 
 	color: ivory;
 }

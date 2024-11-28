@@ -105,7 +105,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 
 			<div className="beer-card-back">
 				<p>
-					<strong>Food Pairing:</strong> {beer.food_pairing}
+					<strong>Food Pairing:</strong> <br /> {beer.food_pairing}
 				</p>
 
 				<button
@@ -124,7 +124,7 @@ const BeerCard = ({ beer, handleUserCardSelect }: BeerCardProps) => {
 					tabIndex={0}
 					type="button"
 				>
-					<h3>i</h3>
+					i
 				</button>
 				<div className={`container-number-back ${getColorByAlcoholLevelClass}`}>
 					<h3>{beer.abv.slice(0, -2)}%</h3>
